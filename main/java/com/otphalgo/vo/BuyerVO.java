@@ -10,19 +10,6 @@ public class BuyerVO {
 	private int gender;
 	private String birth;
 	
-	public BuyerVO(){}
-	public BuyerVO(String num, String id, String pw, String name, String email, String reg_date, int gender,
-			String birth) {
-		super();
-		this.num = num;
-		this.id = id;
-		this.pw = pw;
-		this.name = name;
-		this.email = email;
-		this.reg_date = reg_date;
-		this.gender = gender;
-		this.birth = birth;
-	}
 	public String getNum() {
 		return num;
 	}

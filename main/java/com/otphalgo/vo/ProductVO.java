@@ -21,31 +21,6 @@ public class ProductVO {
 	private String bo_write_date;
 	private int bo_viewcount;
 	
-	public ProductVO(){}
-
-	public ProductVO(int code, String pro_seller_num, String pro_name, int pro_price, String pro_sizes,
-			double pro_sal_rate, int pro_stock, String pro_image, int pro_cate_code, int bo_seq, String bo_title,
-			String bo_sub_title, String bo_writer_num, String bo_contents, String bo_contents_image,
-			String bo_write_date, int bo_viewcount) {
-		super();
-		this.code = code;
-		this.pro_seller_num = pro_seller_num;
-		this.pro_name = pro_name;
-		this.pro_price = pro_price;
-		this.pro_sizes = pro_sizes;
-		this.pro_sal_rate = pro_sal_rate;
-		this.pro_stock = pro_stock;
-		this.pro_image = pro_image;
-		this.pro_cate_code = pro_cate_code;
-		this.bo_seq = bo_seq;
-		this.bo_title = bo_title;
-		this.bo_sub_title = bo_sub_title;
-		this.bo_writer_num = bo_writer_num;
-		this.bo_contents = bo_contents;
-		this.bo_contents_image = bo_contents_image;
-		this.bo_write_date = bo_write_date;
-		this.bo_viewcount = bo_viewcount;
-	}
 	public int getCode() {
 		return code;
 	}

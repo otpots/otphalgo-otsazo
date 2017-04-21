@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="sell">
+	<select id="selectall" resultType="sellvo">
+		select * from seller
+	</select>
+	<select id="selectone" parameterType="sellvo" resultType="sellvo">
+		select * from seller where num = #{num}
+	</select>
+	
+	<select id="selectcheck" parameterType="sellvo" resultType="sellvo">
+		select * from seller where 
+		<if test="id != null" >id = #{id} </if>
+		<if test="email != null" >email = #{email} </if>
+	</select>
+	
+	<insert id="insert" parameterType="sellvo">
+		insert into seller values(#{num}, #{id}, #{pw}, #{name}, #{email}, default, #{phone}, #{address}, #{license}, #{account})
+	</insert>
+	
+	<update id="update" parameterType="sellvo">
+		update seller
+		<set>
+			<if test="pw != null" >pw = #{pw}, </if>
+			<if test="name != null" >name = #{name}, </if>
+			<if test="phone != null" >phone = #{phone}, </if>
+			<if test="address != null" >address = #{address}, </if>
+			<if test="license != null" >license = #{license}, </if>
+			<if test="account != null" >account = #{account}, </if>
+			email = email 			
+		</set> 
+		where num = #{num}
+	</update>
+	
+	<delete id="delete" parameterType="sellvo">
+		delete seller where num = #{num}
+	</delete>
+
+
+</mapper>
