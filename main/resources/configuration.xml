@@ -6,5 +6,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="buyvo" type="com.otphalgo.vo.BuyerVO" />
+		<typeAlias alias="sellvo" type="com.otphalgo.vo.SellerVO"/>
 	</typeAliases>
 </configuration>
