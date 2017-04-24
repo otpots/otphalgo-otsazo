@@ -11,9 +11,11 @@
 <title>로그인</title>
 </head>
 <body>
+
 <div class="container">
-	<div class="col-sm-3"></div>
-	<div class="col-sm-6" id="center">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-4" id="center">
+		<form action="userlogin" method="post">
 		<div class="col-sm-12">
 			<label for="id">아이디:</label> 
 			<input type="text" class="form-control" id="input_id" name="id">
@@ -22,9 +24,29 @@
 			<label for="id">비밀번호:</label> 
 			<input type="password" class="form-control" id="input_id" name="id">
 		</div>
-	
+		<div class="col-sm-12">
+			<button type="submit" class="btn btn-default btn-block" style="margin-top: 20px; padding: 15px;">로그인</button>
+            <button type="button" class="btn btn-block" style="margin-top: 10px; padding: 15px;" id="btn_join">회원가입</button>
+		</div>
+		</form>
+        <div class="clo-sm-12" align="right">
+        	<button type="button" class="btn btn-link" id="btn_find" style="margin-top: 10px;">아이디/비밀번호를 잊어버리셨나요?</button>
+        </div>
 	</div>
-	<div class="col-sm-3"></div>
+	<div class="col-sm-"></div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$('#btn_join').on('click', function(){
+		$(location).attr('href', 'join')
+	});	
+	$('#btn_find').on('click', function(){
+		$(location).attr('href', 'find')
+	});
+	
+});
+</script>
 </body>
 </html>

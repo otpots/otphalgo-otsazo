@@ -19,17 +19,17 @@ public class SellerController {
 	@Autowired
 	SellerService sellerservice;
 	
-	@RequestMapping(value="seller/join", method=RequestMethod.GET)
+	@RequestMapping(value="join/seller", method=RequestMethod.GET)
 	public String sellerJoinForm(){
 		log.info("====> sellerJoinForm");
-		return "/seller/sellerjoinform";
+		return "/join/sellerjoinform";
 	}
 	
-	@RequestMapping(value="seller/join", method=RequestMethod.POST)
+	@RequestMapping(value="join/seller", method=RequestMethod.POST)
 	public String sellerJoinComp(SellerVO svo){
 		log.info("====> sellerJoinComp");
 		sellerservice.insertSeller(svo);
-		return "/seller/joinsuccess";
+		return "/join/joinsuccess";
 	}
 
 
