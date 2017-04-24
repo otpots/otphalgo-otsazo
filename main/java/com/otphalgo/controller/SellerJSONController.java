@@ -17,7 +17,7 @@ public class SellerJSONController {
 	
 	@ResponseBody
 	@RequestMapping(value="seller/check", method=RequestMethod.POST)
-	public boolean idcheck(SellerVO svo){
+	public boolean sellerCheck(SellerVO svo){
 		boolean result = false;
 		SellerVO resultvo = sellerservice.selectSellerCheck(svo);
 		if(resultvo == null){
