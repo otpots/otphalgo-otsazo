@@ -27,6 +27,8 @@ public class BuyerController {
 	@RequestMapping(value="buyer/join", method=RequestMethod.POST)
 	public String buyerJoinComp(BuyerVO bvo){
 		log.info("====> buyerJoinComp");
+		log.info("insert member :: "+bvo.toString());
+		buyerservice.insertBuyer(bvo);
 		return "/buyer/buyerjoinsuccess";
 	}
 

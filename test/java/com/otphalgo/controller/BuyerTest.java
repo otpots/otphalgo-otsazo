@@ -1,5 +1,7 @@
 package com.otphalgo.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 
@@ -38,10 +40,11 @@ public class BuyerTest {
 	}*/
 	
 	@Test
-	public void selectoneTest() throws Exception{
-		BuyerVO vo = new BuyerVO();
-		vo.setNum("1235");
-		log.info(dao.selectBuyerOne(vo).toString());
+	public void selectallTest() throws Exception{
+		List<BuyerVO> list = dao.selectBuyerAll();
+		for(BuyerVO bvo : list){
+			log.info(bvo.toString());
+		}
 	}
 
 }

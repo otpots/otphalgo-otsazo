@@ -1,6 +1,7 @@
 package com.otphalgo.serviceImpl;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,7 @@ public class BuyerServiceImpl implements BuyerService {
 
 	@Override
 	public void insertBuyer(BuyerVO bvo) {
+		bvo.setNum("b"+UUID.randomUUID().toString().replace("-", ""));
 		dao.insertBuyer(bvo);
 	}
 
