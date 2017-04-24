@@ -4,12 +4,37 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="buy">
-	<select id="selectBuyerOne" parameterType="buyvo" resultType="buyvo">
+	<select id="selectall" resultType="buyvo">
+		select * from buyer
+	</select>
+	<select id="selectone" parameterType="buyvo" resultType="buyvo">
 		select * from buyer where num = #{num}
 	</select>
 	
-	<insert id="insertBuyer" parameterType="buyvo">
+	<select id="selectcheck" parameterType="buyvo" resultType="buyvo">
+		select * from buyer where 
+		<if test="id != null" >id = #{id} </if>
+		<if test="email != null" >email = #{email} </if>
+	</select>
+	
+	<insert id="insert" parameterType="buyvo">
 		insert into buyer values(#{num}, #{id}, #{pw}, #{name}, #{email}, default, #{gender}, #{birth})
 	</insert>
+	
+	<update id="update" parameterType="buyvo">
+		update buyer
+		<set>
+			<if test="pw != null" >pw = #{pw}, </if>
+			<if test="name != null" >name = #{name}, </if>
+			<if test="gender != null" >gender = #{gender}, </if>
+			<if test="birth != null" >birth = #{birth}, </if>
+			email = email 			
+		</set> 
+		where num = #{num}
+	</update>
+	
+	<delete id="delete" parameterType="buyvo">
+		delete buyer where num = #{num}
+	</delete>
 
 </mapper>

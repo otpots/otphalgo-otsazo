@@ -21,15 +21,15 @@ public class SellerController {
 	
 	@RequestMapping(value="seller/join", method=RequestMethod.GET)
 	public String sellerJoinForm(){
-		// 판매자 회원 가입 폼으로 이동 
+		log.info("====> sellerJoinForm");
 		return "/seller/sellerjoinform";
 	}
 	
 	@RequestMapping(value="seller/join", method=RequestMethod.POST)
 	public String sellerJoinComp(SellerVO svo){
-		// seller DB 데이터 추가 성공
+		log.info("====> sellerJoinComp");
 		sellerservice.insertSeller(svo);
-		return "/seller/sellerjoinsuccess";
+		return "/seller/joinsuccess";
 	}
 
 

@@ -6,24 +6,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.otphalgo.service.SellerService;
-import com.otphalgo.vo.SellerVO;
+import com.otphalgo.service.BuyerService;
+import com.otphalgo.vo.BuyerVO;
 
 @RestController
-public class SellerJSONController {
+public class BuyerJSONController {
 	
 	@Autowired
-	SellerService sellerservice;
+	BuyerService buyerservice;
 	
 	@ResponseBody
-	@RequestMapping(value="seller/check", method=RequestMethod.POST)
-	public boolean sellerCheck(SellerVO svo){
+	@RequestMapping(value="buyer/check", method=RequestMethod.POST)
+	public boolean buyerCheck(BuyerVO bvo){
 		boolean result = false;
-		SellerVO resultvo = sellerservice.selectSellerCheck(svo);
+		BuyerVO resultvo = buyerservice.selectBuyerCheck(bvo);
 		if(resultvo == null){
 			result = true;
 		}
 		return result;
 	}
-	
+
 }
