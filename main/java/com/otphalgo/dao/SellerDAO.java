@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.otphalgo.vo.MemberVO;
 import com.otphalgo.vo.SellerVO;
 
 @Repository
@@ -37,5 +38,10 @@ public class SellerDAO {
 	public void deleteSeller(SellerVO svo){
 		session.delete("sell.delete", svo);
 	}
+	
+	public MemberVO loginSeller(MemberVO mvo) {
+		return session.selectOne("sell.loginseller", mvo);
+	}
+	
 
 }

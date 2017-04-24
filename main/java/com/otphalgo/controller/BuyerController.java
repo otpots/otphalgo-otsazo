@@ -18,18 +18,18 @@ public class BuyerController {
 	@Autowired
 	BuyerService buyerservice;
 	
-	@RequestMapping(value="buyer/join", method=RequestMethod.GET)
+	@RequestMapping(value="join/buyer", method=RequestMethod.GET)
 	public String buyerJoinForm(){
 		log.info("====> buyerJoinForm");
-		return "/buyer/buyerjoinform";
+		return "/join/buyerjoinform";
 	}
 	
-	@RequestMapping(value="buyer/join", method=RequestMethod.POST)
+	@RequestMapping(value="join/buyer", method=RequestMethod.POST)
 	public String buyerJoinComp(BuyerVO bvo){
 		log.info("====> buyerJoinComp");
 		log.info("insert member :: "+bvo.toString());
 		buyerservice.insertBuyer(bvo);
-		return "/seller/joinsuccess";
+		return "/join/joinsuccess";
 	}
 
 }

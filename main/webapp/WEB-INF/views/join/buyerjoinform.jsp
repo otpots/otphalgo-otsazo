@@ -16,7 +16,7 @@
 <div class="container">
 	<div class="col-sm-3"></div>
 	<div class="col-sm-6" id="center">
-		<form id="target" action="join" method="post">
+		<form id="target" action="buyer" method="post">
 			<input type="hidden" id="email_confirm" value="false">
 			<input type="hidden" id="id_confirm" value="false">
 			<div class="col-sm-12">

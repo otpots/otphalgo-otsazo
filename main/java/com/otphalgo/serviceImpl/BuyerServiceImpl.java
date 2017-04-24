@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.otphalgo.dao.BuyerDAO;
 import com.otphalgo.service.BuyerService;
 import com.otphalgo.vo.BuyerVO;
+import com.otphalgo.vo.MemberVO;
 
 @Service("buyerservice")
 public class BuyerServiceImpl implements BuyerService {
@@ -45,6 +46,11 @@ public class BuyerServiceImpl implements BuyerService {
 	@Override
 	public void deleteBuyer(BuyerVO bvo) {
 		dao.deleteBuyer(bvo);
+	}
+
+	@Override
+	public MemberVO loginBuyer(MemberVO mvo) {
+		return dao.loginBuyer(mvo);
 	}
 
 }

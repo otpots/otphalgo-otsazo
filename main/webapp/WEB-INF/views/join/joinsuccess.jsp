@@ -29,7 +29,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#btn_login').on('click', function(){
-		$(location).attr('href', '../login');
+		$(location).attr('href', '../userlogin');
 	});
 	
 });

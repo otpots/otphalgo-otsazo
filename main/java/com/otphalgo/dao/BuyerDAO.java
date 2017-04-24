@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.otphalgo.vo.BuyerVO;
+import com.otphalgo.vo.MemberVO;
 
 @Repository
 public class BuyerDAO {
@@ -36,6 +37,10 @@ public class BuyerDAO {
 	
 	public void deleteBuyer(BuyerVO bvo){
 		session.delete("buy.delete", bvo);
+	}
+	
+	public MemberVO loginBuyer(MemberVO mvo){
+		return session.selectOne("buy.loginbuyer", mvo);
 	}
 
 }
