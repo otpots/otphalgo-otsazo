@@ -29,7 +29,7 @@ public class SellerController {
 	public String sellerJoinComp(SellerVO svo){
 		log.info("====> sellerJoinComp");
 		sellerservice.insertSeller(svo);
-		return "/seller/sellerjoinsuccess";
+		return "/seller/joinsuccess";
 	}
 
 

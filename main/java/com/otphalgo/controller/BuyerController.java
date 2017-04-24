@@ -29,7 +29,7 @@ public class BuyerController {
 		log.info("====> buyerJoinComp");
 		log.info("insert member :: "+bvo.toString());
 		buyerservice.insertBuyer(bvo);
-		return "/buyer/buyerjoinsuccess";
+		return "/seller/joinsuccess";
 	}
 
 }
