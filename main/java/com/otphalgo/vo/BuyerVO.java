@@ -1,6 +1,6 @@
 package com.otphalgo.vo;
 
-public class BuyerVO {
+public class BuyerVO extends MemberVO{
 	private String num;
 	private String id;
 	private String pw;

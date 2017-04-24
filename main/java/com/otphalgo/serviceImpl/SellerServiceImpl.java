@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.otphalgo.controller.SellerController;
 import com.otphalgo.dao.SellerDAO;
 import com.otphalgo.service.SellerService;
+import com.otphalgo.vo.MemberVO;
 import com.otphalgo.vo.SellerVO;
 
 @Service("sellerservice")
@@ -51,6 +52,11 @@ public class SellerServiceImpl implements SellerService {
 	@Override
 	public void deleteSeller(SellerVO svo) {
 		dao.deleteSeller(svo);
+	}
+
+	@Override
+	public MemberVO loginSeller(MemberVO mvo) {
+		return dao.loginSeller(mvo);
 	}
 	
 	

@@ -36,5 +36,9 @@
 	<delete id="delete" parameterType="buyvo">
 		delete buyer where num = #{num}
 	</delete>
+	
+	<select id="loginbuyer" parameterType="memvo" resultType="memvo">
+		select num, id, pw from buyer where id = #{id}
+	</select>
 
 </mapper>
