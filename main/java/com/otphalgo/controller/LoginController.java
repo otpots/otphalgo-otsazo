@@ -32,32 +32,10 @@ public class LoginController {
 	@Autowired
 	BuyerService buyerservice;
 	
-	@RequestMapping(value="userlogin", method=RequestMethod.GET)
+	@RequestMapping("userlogin")
 	public String loginForm(HttpServletRequest request){
 		log.info("loginForm : ");
 		return "/login/loginform";
-	}
-	
-	@RequestMapping(value="userlogin", method=RequestMethod.POST)
-	public String loginComp(MemberVO mvo, Model model, HttpSession session){
-		log.info("loginComp : ");
-		MemberVO svo = sellerservice.loginSeller(mvo);
-		MemberVO bvo = buyerservice.loginBuyer(mvo);
-		String jsp = "redirect:/userlogin";
-		if(svo != null){
-			if(mvo.getPw().equals(svo.getPw())){
-				//로그인성공
-				model.addAttribute("user", svo);
-				jsp = "redirect:"+(String)session.getAttribute("backpage");
-			}
-		} else if(bvo != null){
-			if(mvo.getPw().equals(bvo.getPw())){
-				//로그인성공
-				model.addAttribute("user", bvo);
-				jsp = "redirect:"+(String)session.getAttribute("backpage");
-			}
-		} 
-		return jsp;
 	}
 	
 	@RequestMapping("userlogout")
