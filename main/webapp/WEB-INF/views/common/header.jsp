@@ -70,7 +70,16 @@
 				<div class="col-sm-8">
 					<div class="shop-menu pull-right">
 						<ul class="nav navbar-nav">
-							<li><a href="userlogin"><i class="fa fa-lock"></i> 로그인</a></li>
+							<% 
+							String url = (String)request.getAttribute("javax.servlet.forward.servlet_path");
+							session.setAttribute("backpage", url);
+							
+							if(session.getAttribute("user") == null){
+								out.print("<li><a href='userlogin'><i class='fa fa-lock'></i> 로그인</a></li>");
+							} else{
+								out.print("<li><a href='userlogout'><i class='fa fa-lock'></i> 로그아웃</a></li>");
+							}
+							%>
 							<li><a href="join"><i class="fa fa-user"></i> 회원가입</a></li>
 							<li><a href="#"><i class="fa fa-star"></i> 마이페이지</a></li>
 							<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>

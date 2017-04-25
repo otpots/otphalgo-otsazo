@@ -15,7 +15,7 @@
 <div class="container">
 	<div class="col-sm-4"></div>
 	<div class="col-sm-4" id="center">
-		<form id="loginform" action="userlogin" method="post">
+		<form action="userlogin" method="post">
 		<div class="col-sm-12">
 			<label for="id">아이디:</label> 
 			<input type="text" class="form-control" id="input_id" name="id">
@@ -30,7 +30,7 @@
 			</div>
         </div>
 		<div class="col-sm-12">
-			<button type="button" class="btn btn-default btn-block" id="btn_login" style="margin-top: 20px; padding: 15px;">로그인</button>
+			<button type="submit" class="btn btn-default btn-block" id="btn_login" style="margin-top: 20px; padding: 15px;">로그인</button>
             <button type="button" class="btn btn-block" style="margin-top: 10px; padding: 15px;" id="btn_join">회원가입</button>
 		</div>
 		</form>
@@ -42,25 +42,6 @@
 </div>
 
 <script type="text/javascript">
-function loginCheckAjax(){
-	$.ajax({
-		url : 'join/logincheck', 
-		type : 'POST', 
-		data : {'id':$('#input_id').val(), 'pw':$('#input_pw').val()}, 
-		dataType : 'text',
-		success : function(result){
-			console.log(result);
-			if(result != "true"){
-				$('#result_login').show();
-				$('#result_login').css("color", "red");
-				$('strong').html("로그인에 실패하였습니다.<br>아이디 혹은 비밀번호를 확인해주세요.");
-			} else{
-				$(location).attr('href', '/controller');
-			}
-		}
-	});
-	
-}
 $(document).ready(function(){
 
 	$('#btn_join').on('click', function(){
@@ -69,10 +50,7 @@ $(document).ready(function(){
 	$('#btn_find').on('click', function(){
 		$(location).attr('href', 'find');
 	});
-	$('#btn_login').on('click', function(){
-		loginCheckAjax();
-	});
-	
+
 });
 </script>
 </body>
