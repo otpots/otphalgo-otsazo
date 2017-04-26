@@ -94,7 +94,7 @@
 								<li><a href='userlogout'><i class='fa fa-lock'></i> 로그아웃</a></li>
 							<%}
 							%>
-							<li><a href="#"><i class="fa fa-star"></i> 마이페이지</a></li>
+							<li><a href="mypage"><i class="fa fa-star"></i> 마이페이지</a></li>
 							<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
 						</ul>
 					</div>

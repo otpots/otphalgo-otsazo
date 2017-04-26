@@ -68,5 +68,7 @@
 		
 	</footer><!--/Footer-->	
 	
+	<script src="js/jquery.scrollUp.min.js"></script>
+	
 </body>
 </html>
