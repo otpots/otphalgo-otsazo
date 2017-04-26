@@ -22,6 +22,7 @@
 	</beans:bean>
 	
 	<beans:bean id="JoinInterceptor" class="com.otphalgo.interceptor.JoinInterceptor"></beans:bean>
+	<beans:bean id="LoginInterceptor" class="com.otphalgo.interceptor.LoginInterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
 			<mapping path="/joinbuyer"/>
@@ -30,7 +31,12 @@
 			<mapping path="/find"/>
 			<beans:ref bean="JoinInterceptor"/>
 		</interceptor>
+		<interceptor>
+			<mapping path="/mypage"/>
+			<beans:ref bean="LoginInterceptor"/>
+		</interceptor>
 	</interceptors>
+
 	
 	<context:component-scan base-package="com.otphalgo.controller" />
 	
