@@ -35,7 +35,7 @@
 var backpage = "/controller<%=(String)session.getAttribute("backpage")%>"
 function loginCheckAjax(){
  	$.ajax({
-		url : 'join/logincheck', 
+		url : 'logincheck', 
  		type : 'POST', 
  		data : {'id':$('#input_id').val(), 'pw':$('#input_pw').val()}, 
  		dataType : 'text',

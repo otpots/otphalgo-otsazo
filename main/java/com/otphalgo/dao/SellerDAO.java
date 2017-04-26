@@ -23,8 +23,8 @@ public class SellerDAO {
 		return session.selectOne("sell.selectone", svo);
 	}
 	
-	public SellerVO selectSellerCheck(SellerVO svo){
-		return session.selectOne("sell.selectcheck", svo);
+	public MemberVO selectSellerCheck(MemberVO mvo){
+		return session.selectOne("sell.selectcheck", mvo);
 	}
 	
 	public void insertSeller(SellerVO svo){

@@ -21,6 +21,17 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<beans:bean id="JoinInterceptor" class="com.otphalgo.interceptor.JoinInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/joinbuyer"/>
+			<mapping path="/joinseller"/>
+			<mapping path="/join"/>
+			<mapping path="/find"/>
+			<beans:ref bean="JoinInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 	<context:component-scan base-package="com.otphalgo.controller" />
 	
 

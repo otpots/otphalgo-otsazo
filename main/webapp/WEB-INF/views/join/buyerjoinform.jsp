@@ -1,22 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>회원가입 : 구매자</title>
-</head>
-<body>
+<%@include file="/WEB-INF/views/common/header.jsp"%>
 
 <div class="container">
 	<div class="col-sm-3"></div>
 	<div class="col-sm-6" id="center">
-		<form id="target" action="buyer" method="post">
+		<form id="target" action="joinbuyer" method="post">
 			<input type="hidden" id="email_confirm" value="false">
 			<input type="hidden" id="id_confirm" value="false">
 			<div class="col-sm-12">
@@ -101,7 +90,7 @@ function idcheckAjax(){
 		dataType : 'text',
 		success : function(result){
 			console.log(result);
-			if(result == "true"){
+			if(result != "true"){
 				$('#result_idcheck').show();
 				$('#result_idcheck').css("color", "green");
 				$('#result_idcheck').text("사용할 수 있는 아이디입니다.");
@@ -122,7 +111,7 @@ function emailcheckAjax(){
 		dataType : 'text',
 		success : function(result){
 			console.log(result);
-			if(result == "true"){
+			if(result != "true"){
 				$('#btn_sendemail').show();
 				$('#result_emailcheck').show();
 				$('#result_emailcheck').css("color", "green");
@@ -142,7 +131,7 @@ function essinfo(id){
 	$('#result_'+id).text("필수정보입니다.");
 }
 function newWindowEmail(){
-	window.open("../email/sendemail?id="+$('#input_id').val()+"&email="+$('#input_email').val(), "email_window", "width=400,height=400,top=200,left=800");
+	window.open("sendemail?id="+$('#input_id').val()+"&email="+$('#input_email').val(), "email_window", "width=400,height=400,top=200,left=800");
 }
 
 $(document).ready(function(){
@@ -222,5 +211,5 @@ $(document).ready(function(){
 });
 
 </script>
-</body>
-</html>
+
+<%@include file="/WEB-INF/views/common/footer.jsp"%>
