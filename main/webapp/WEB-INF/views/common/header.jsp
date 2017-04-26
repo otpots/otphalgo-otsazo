@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -32,6 +32,15 @@
 </head>
 
 <body>
+
+<!-- js 파일 불러오기 -->
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.scrollUp.min.js"></script>
+<script src="js/price-range.js"></script>
+<script src="js/jquery.prettyPhoto.js"></script>
+<script src="js/main.js"></script>
+
 <header id="header"><!--header-->
 	<div class="header_top"><!--header_top-->
 		<div class="container">
@@ -71,16 +80,19 @@
 					<div class="shop-menu pull-right">
 						<ul class="nav navbar-nav">
 							<% 
-							String url = (String)request.getAttribute("javax.servlet.forward.servlet_path");
-							session.setAttribute("backpage", url);
-							
-							if(session.getAttribute("user") == null){
-								out.print("<li><a href='userlogin'><i class='fa fa-lock'></i> 로그인</a></li>");
-							} else{
-								out.print("<li><a href='userlogout'><i class='fa fa-lock'></i> 로그아웃</a></li>");
+							if(!((String)request.getAttribute("javax.servlet.forward.servlet_path")).equals("/userlogin")){
+								String url = (String)request.getAttribute("javax.servlet.forward.servlet_path");
+								session.setAttribute("backpage", url);
 							}
+							
+							if(session.getAttribute("user") == null){ %>
+								<li><a href='userlogin'><i class='fa fa-lock'></i> 로그인</a></li>
+								<li><a href='join'><i class='fa fa-user'></i> 회원가입</a></li>
+							<%} else{ %>
+								<li><a href='#'><i class='fa fa-lock'></i> <strong>${sessionScope.user.id }</strong> 님</a></li>
+								<li><a href='userlogout'><i class='fa fa-lock'></i> 로그아웃</a></li>
+							<%}
 							%>
-							<li><a href="join"><i class="fa fa-user"></i> 회원가입</a></li>
 							<li><a href="#"><i class="fa fa-star"></i> 마이페이지</a></li>
 							<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
 						</ul>
@@ -97,7 +109,50 @@
 				<div class="mainmenu pull-left">
 					<ul class="nav navbar-nav collapse navbar-collapse">
 						<li><a href="#" class="active">Category</a></li>
-						<%
+						<li class="dropdown"><a href="#">여성의류<i class="fa fa-angle-down"></i></a>
+                           <ul role="menu" class="sub-menu">
+                              <li><a href="#">티셔츠</a></li>
+                              <li><a href="#">블라우스·셔츠</a></li>
+                              <li><a href="#">니트·가디건</a></li>
+                              <li><a href="#">자켓·점퍼·코트</a></li>
+                              <li><a href="#">원피스·정장세트</a></li>
+                              <li><a href="#">진·팬츠·스커트</a></li>
+                              <li><a href="#">언더웨어·수영복</a></li>
+                           </ul>   
+                        </li>
+                        <li class="dropdown"><a href="#">남성의류<i class="fa fa-angle-down"></i></a>
+                           <ul role="menu" class="sub-menu">
+                              <li><a href="#">티셔츠</a></li>
+                              <li><a href="#">니트·가디건</a></li>
+                              <li><a href="#">셔츠·남방</a></li>
+                              <li><a href="#">드레스셔츠·정장</a></li>
+                              <li><a href="#">자켓·점퍼·코트</a></li>
+                              <li><a href="#">진·팬츠</a></li>
+                              <li><a href="#">언더웨어·수영복</a></li>
+                           </ul>   
+                        </li>
+                        <li class="dropdown"><a href="#">캐주얼의류<i class="fa fa-angle-down"></i></a>
+                           <ul role="menu" class="sub-menu">
+                              <li><a href="#">티셔츠</a></li>
+                              <li><a href="#">셔츠·남방</a></li>
+                              <li><a href="#">니트·가디건</a></li>
+                              <li><a href="#">진·팬츠·스커트</a></li>
+                              <li><a href="#">자켓·점퍼·코트</a></li>
+                           </ul>   
+                        </li>
+                        <li class="dropdown"><a href="#">스포츠의류<i class="fa fa-angle-down"></i></a>
+                           <ul role="menu" class="sub-menu">
+                              <li><a href="#">티셔츠·맨투맨</a></li>
+                              <li><a href="#">자켓·점퍼·패딩</a></li>
+                              <li><a href="#">팬츠</a></li>
+                              <li><a href="#">트레이닝·요가복</a></li>
+                              <li><a href="#">골프웨어</a></li>
+                              <li><a href="#">등산복</a></li>
+                              <li><a href="#">이너웨어</a></li>
+                              <li><a href="#">수영복·보드복</a></li>
+                           </ul>   
+                        </li>
+						<%-- <%
 						List<ProCategoryVO> list = (List<ProCategoryVO>)request.getAttribute("list");
 						for(ProCategoryVO vo : list){
 							if(vo.getCode() <20){
@@ -114,7 +169,7 @@
 						}
 						out.println("</li>");
 						
-						%>
+						%> --%>
 						</ul>
 					</div>
 				</div>
