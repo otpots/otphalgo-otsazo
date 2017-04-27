@@ -16,7 +16,7 @@ import com.otphalgo.vo.MemberVO;
 @SessionAttributes("user")
 public class CartJSONController {
 
-	private static final Logger log = LoggerFactory.getLogger(LoginJSONController.class);
+	private static final Logger log = LoggerFactory.getLogger(CartJSONController.class);
 	
 	@Autowired
 	CartService service;
