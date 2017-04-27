@@ -28,8 +28,8 @@ public class BuyerServiceImpl implements BuyerService {
 	}
 
 	@Override
-	public BuyerVO selectBuyerCheck(BuyerVO bvo) {
-		return dao.selectBuyerCheck(bvo);
+	public MemberVO selectBuyerCheck(MemberVO mvo) {
+		return dao.selectBuyerCheck(mvo);
 	}
 
 	@Override

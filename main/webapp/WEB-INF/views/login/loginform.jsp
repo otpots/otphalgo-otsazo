@@ -1,21 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>로그인</title>
-</head>
-<body>
+<%@include file="/WEB-INF/views/common/header.jsp"%>
 
 <div class="container">
 	<div class="col-sm-4"></div>
 	<div class="col-sm-4" id="center">
-		<form id="loginform" action="userlogin" method="post">
+		<form action="userlogin" method="post">
 		<div class="col-sm-12">
 			<label for="id">아이디:</label> 
 			<input type="text" class="form-control" id="input_id" name="id">
@@ -42,25 +32,26 @@
 </div>
 
 <script type="text/javascript">
+var backpage = "/controller<%=(String)session.getAttribute("backpage")%>"
 function loginCheckAjax(){
-	$.ajax({
-		url : 'join/logincheck', 
-		type : 'POST', 
-		data : {'id':$('#input_id').val(), 'pw':$('#input_pw').val()}, 
-		dataType : 'text',
-		success : function(result){
-			console.log(result);
-			if(result != "true"){
-				$('#result_login').show();
-				$('#result_login').css("color", "red");
-				$('strong').html("로그인에 실패하였습니다.<br>아이디 혹은 비밀번호를 확인해주세요.");
-			} else{
-				$(location).attr('href', '/controller');
-			}
-		}
-	});
-	
-}
+ 	$.ajax({
+		url : 'logincheck', 
+ 		type : 'POST', 
+ 		data : {'id':$('#input_id').val(), 'pw':$('#input_pw').val()}, 
+ 		dataType : 'text',
+ 		success : function(result){
+ 			console.log(result);
+ 			if(result != "true"){
+ 			$('#result_login').show();
+ 				$('#result_login').css("color", "red");
+ 				$('strong').html("로그인에 실패하였습니다.<br>아이디 혹은 비밀번호를 확인해주세요.");
+ 			} else{
+ 				$(location).attr('href', backpage);
+ 			}
+ 		}
+ 	});
+ 	
+ }
 $(document).ready(function(){
 
 	$('#btn_join').on('click', function(){
@@ -70,10 +61,10 @@ $(document).ready(function(){
 		$(location).attr('href', 'find');
 	});
 	$('#btn_login').on('click', function(){
-		loginCheckAjax();
-	});
-	
+ 		loginCheckAjax();
+ 	});
+
 });
 </script>
-</body>
-</html>
+
+<%@include file="/WEB-INF/views/common/footer.jsp"%>

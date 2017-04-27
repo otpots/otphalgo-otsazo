@@ -33,8 +33,8 @@ public class SellerServiceImpl implements SellerService {
 	}
 
 	@Override
-	public SellerVO selectSellerCheck(SellerVO svo) {
-		return dao.selectSellerCheck(svo);
+	public MemberVO selectSellerCheck(MemberVO mvo) {
+		return dao.selectSellerCheck(mvo);
 	}
 
 	@Override

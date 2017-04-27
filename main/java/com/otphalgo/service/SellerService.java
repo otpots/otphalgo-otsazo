@@ -9,7 +9,7 @@ public interface SellerService {
 	
 	List<SellerVO> selectSellerAll();
 	SellerVO selectSellerOne(SellerVO svo);
-	SellerVO selectSellerCheck(SellerVO svo);
+	MemberVO selectSellerCheck(MemberVO mvo);
 	void insertSeller(SellerVO svo);
 	void updateSeller(SellerVO svo);
 	void deleteSeller(SellerVO svo);

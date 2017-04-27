@@ -9,7 +9,7 @@ public interface BuyerService {
 	
 	List<BuyerVO> selectBuyerAll();
 	BuyerVO selectBuyerOne(BuyerVO bvo);
-	BuyerVO selectBuyerCheck(BuyerVO bvo);
+	MemberVO selectBuyerCheck(MemberVO mvo);
 	void insertBuyer(BuyerVO bvo);
 	void updateBuyer(BuyerVO bvo);
 	void deleteBuyer(BuyerVO bvo);
