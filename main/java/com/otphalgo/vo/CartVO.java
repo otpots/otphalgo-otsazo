@@ -39,4 +39,9 @@ public class CartVO {
 		this.count = count;
 	}
 	
+	@Override
+	public String toString() {
+		return "CartVO [seq=" + seq + ", buyer_num=" + buyer_num + ", pro_code=" + pro_code + ", count=" + count + "]";
+	}
+	
 }

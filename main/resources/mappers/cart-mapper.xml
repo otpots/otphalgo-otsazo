@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="cart">
+	<!-- <select id="selectall" resultType="cartvo">
+		select p.code, p.name, p.price, p.image, c.count, p.price*c.count total from pro p, cart c where p.code=c.pro_code and c.buyer_num='#{buyer_num}';
+	</select> -->
+	<select id="selectAllCart" parameterType="memvo" resultType="cartvo">
+		select * from cart where buyer_num=#{num}
+	</select>
+	<select id="selectAllPro" parameterType="cartvo" resultType="pronboardvo">
+		select * from pro where code=#{code}
+	</select>
+	
+	<insert id="insert" parameterType="cartvo">
+		insert into cart values(#{buyer_num}, #{pro_code},#{count})
+	</insert>
+</mapper>

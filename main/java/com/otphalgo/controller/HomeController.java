@@ -14,13 +14,13 @@ import com.otphalgo.vo.ProCategoryVO;
 public class HomeController {
 	    
     @Autowired
-    ProCategoryService service;
+    ProCategoryService proCategoryService;
     
     @RequestMapping("/")
     public ModelAndView home() {
         ModelAndView mav = new ModelAndView();
-        List<ProCategoryVO> list = service.selectProCategoryAll();
-        
+        List<ProCategoryVO> list = proCategoryService.selectProCategoryAll();
+        //영철이 오면 mapper쓰는거 물어보고, 서비스 어떤식으로 만들었는지도 물어보기
         mav.addObject("list", list);
         mav.setViewName("home");
         return mav;

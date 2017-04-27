@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -84,7 +84,50 @@
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="#" class="active">Category</a></li>
-								<%
+								<li class="dropdown"><a href="#">여성의류<i class="fa fa-angle-down"></i></a>
+									<ul role="menu" class="sub-menu">
+										<li><a href="#" onclick="location.href='티셔츠'; return false;">티셔츠</a></li>
+										<li><a href="#">블라우스·셔츠</a></li>
+										<li><a href="#">니트·가디건</a></li>
+										<li><a href="#">자켓·점퍼·코트</a></li>
+										<li><a href="#">원피스·정장세트</a></li>
+										<li><a href="#">진·팬츠·스커트</a></li>
+										<li><a href="#">언더웨어·수영복</a></li>
+									</ul>	
+								</li>
+								<li class="dropdown"><a href="#">남성의류<i class="fa fa-angle-down"></i></a>
+									<ul role="menu" class="sub-menu">
+										<li><a href="#">티셔츠</a></li>
+										<li><a href="#">니트·가디건</a></li>
+										<li><a href="#">셔츠·남방</a></li>
+										<li><a href="#">드레스셔츠·정장</a></li>
+										<li><a href="#">자켓·점퍼·코트</a></li>
+										<li><a href="#">진·팬츠</a></li>
+										<li><a href="#">언더웨어·수영복</a></li>
+									</ul>	
+								</li>
+								<li class="dropdown"><a href="#">캐주얼의류<i class="fa fa-angle-down"></i></a>
+									<ul role="menu" class="sub-menu">
+										<li><a href="#">티셔츠</a></li>
+										<li><a href="#">셔츠·남방</a></li>
+										<li><a href="#">니트·가디건</a></li>
+										<li><a href="#">진·팬츠·스커트</a></li>
+										<li><a href="#">자켓·점퍼·코트</a></li>
+									</ul>	
+								</li>
+								<li class="dropdown"><a href="#">스포츠의류<i class="fa fa-angle-down"></i></a>
+									<ul role="menu" class="sub-menu">
+										<li><a href="#">티셔츠·맨투맨</a></li>
+										<li><a href="#">자켓·점퍼·패딩</a></li>
+										<li><a href="#">팬츠</a></li>
+										<li><a href="#">트레이닝·요가복</a></li>
+										<li><a href="#">골프웨어</a></li>
+										<li><a href="#">등산복</a></li>
+										<li><a href="#">이너웨어</a></li>
+										<li><a href="#">수영복·보드복</a></li>
+									</ul>	
+								</li>		
+								<%-- <%
 								List<ProCategoryVO> list = (List<ProCategoryVO>)request.getAttribute("list");
 								for(ProCategoryVO vo : list){
 									if(vo.getCode() <20){
@@ -101,7 +144,7 @@
 								}
 								out.println("</li>");
 								
-								%>
+								%> --%>
 							</ul>
 						</div>
 					</div>
@@ -420,6 +463,29 @@
 		
 	</footer><!--/Footer-->
 	
+	<script type="text/javascript">
+	function cartAjax(){
+		$.ajax({
+			url : 'check', 
+			type : 'POST', 
+			data : {'id':$('#input_id').val()}, 
+			dataType : 'text',
+			success : function(result){
+				console.log(result);
+				if(result == "true"){
+					$('#result_idcheck').show();
+					$('#result_idcheck').css("color", "green");
+					$('#result_idcheck').text("사용할 수 있는 아이디입니다.");
+					$('#id_confirm').val("true")
+				} else{
+					$('#result_idcheck').show();
+					$('#result_idcheck').css("color", "red");
+					$('#result_idcheck').text("중복된 아이디입니다.");
+				}
+			}
+		});
+	}
+	</script>
 	
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -428,6 +494,13 @@
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
 	
-	
+	<script type="text/javascript">
+$(document).ready(function(){
+	$('.btn.btn-default.add-to-cart').on('click', function(e){
+		$(location).attr('href', 'cart')
+		e.preventDefault();
+	});
+});
+</script>
 </body>
 </html>
