@@ -2,39 +2,40 @@ package com.otphalgo.vo;
 
 public class AddBookVO {
 	
-	private int seq;
 	private String num;
-	private String phone;
-	private String address;
+	private String address2;
+	private String address3;
+	private String address4;
 	
-	public int getSeq() {
-		return seq;
-	}
-	public void setSeq(int seq) {
-		this.seq = seq;
-	}
 	public String getNum() {
 		return num;
 	}
 	public void setNum(String num) {
 		this.num = num;
 	}
-	public String getPhone() {
-		return phone;
+	public String getAddress2() {
+		return address2;
 	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setAddress2(String address2) {
+		this.address2 = address2;
 	}
-	public String getAddress() {
-		return address;
+	public String getAddress3() {
+		return address3;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddress3(String address3) {
+		this.address3 = address3;
+	}
+	public String getAddress4() {
+		return address4;
+	}
+	public void setAddress4(String address4) {
+		this.address4 = address4;
 	}
 	
 	@Override
 	public String toString() {
-		return "AddBookVO [seq=" + seq + ", num=" + num + ", phone=" + phone + ", address=" + address + "]";
+		return "AddBookVO [num=" + num + ", address2=" + address2 + ", address3=" + address3 + ", address4=" + address4
+				+ "]";
 	}
 
 }

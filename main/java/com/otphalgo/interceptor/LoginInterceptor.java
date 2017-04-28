@@ -15,14 +15,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-
-		log.info("preHandle ------------------------ ");
 		
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("user") == null){
 			
-			log.info("인터셉터 : 로그인 된 유저가 없음 -> 로그인창으로 돌아감 ");
+			log.info("인터셉터 : 로그인창으로 가기 (로그인하지 않음)");
 			
 			response.sendRedirect("userlogin");
 			return false;

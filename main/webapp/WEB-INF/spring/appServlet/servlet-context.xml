@@ -25,14 +25,14 @@
 	<beans:bean id="LoginInterceptor" class="com.otphalgo.interceptor.LoginInterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
-			<mapping path="/joinbuyer"/>
-			<mapping path="/joinseller"/>
+			<mapping path="/joinBuyer"/>
+			<mapping path="/joinSeller"/>
 			<mapping path="/join"/>
 			<mapping path="/find"/>
 			<beans:ref bean="JoinInterceptor"/>
 		</interceptor>
 		<interceptor>
-			<mapping path="/mypage"/>
+			<mapping path="/mypage*"/>
 			<beans:ref bean="LoginInterceptor"/>
 		</interceptor>
 	</interceptors>

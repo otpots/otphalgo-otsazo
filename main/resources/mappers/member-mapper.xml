@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="member">
+	
+	<select id="selectall" resultType="memvo">
+		select * from member
+	</select>
+	
+	<!-- 중복체크, 로그인 -->
+	<select id="selectone" parameterType="memvo" resultType="memvo">
+		select * from member where 
+		<if test="id != null" >id = #{id} </if>
+		<if test="email != null" >email = #{email} </if>
+	</select>
+	
+	<select id="selectpw" parameterType="memvo" resultType="memvo">
+		select * from member where pw = #{pw}
+	</select>
+	
+	<!-- 회원가입 일반멤버(구매자)/판매자 -->
+	<insert id="insert" parameterType="memvo">
+		insert into member values(#{num}, #{id}, #{pw}, #{name}, #{autho}, #{email}, default, #{phone}, #{address}, #{gender}, #{birth})
+	</insert>	
+	<insert id="s_insert" parameterType="sellvo">
+		insert into seller values(#{num}, #{license}, #{account})
+	</insert>
+	
+	<!-- 회원정보수정 일반멤버(구매자)/판매자 -->
+	<update id="update" parameterType="memvo">
+		update member
+		<set>
+			<if test="pw != ''" >pw = #{pw}, </if>
+			<if test="name != ''" >name = #{name}, </if>
+			<if test="phone != ''">phone = #{phone}, </if>
+			<if test="address != ''">address = #{address}, </if>
+			<if test="gender != 0" >gender = #{gender}, </if>
+			<if test="birth != ''" >birth = #{birth}, </if>
+			email = email 			
+		</set> 
+		where num = #{num}
+	</update>
+	<update id="s_update" parameterType="sellvo">
+		update member
+		<set>
+			<if test="license != null" >license = #{license}, </if>
+			<if test="account != null" >account = #{account}, </if>
+			email = email 			
+		</set> 
+		where num = #{num}
+	</update>
+	
+</mapper>

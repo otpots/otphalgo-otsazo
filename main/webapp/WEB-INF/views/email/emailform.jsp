@@ -12,7 +12,8 @@
 </head>
 <body>
 <div class="container">
-    <center>
+<div class="row text-center">
+
 	<div class="panel panel-default">
 		<div class="panel-heading">${param.id } 회원님! 인증 번호를 입력하세요.</div>
 		<div class="panel-body">
@@ -26,12 +27,13 @@
 
 		</div>
     </div>
-	</center>
+
+</div>
 </div>
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$('window').unload(function(){
+	$(window).unload(function(){
 		$("#email_confirm", parent.opener.document).val("false");
 		self.close();
 	});

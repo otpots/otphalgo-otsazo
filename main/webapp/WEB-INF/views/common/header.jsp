@@ -28,6 +28,8 @@
     	.girl.img-responsive{
     		height: 441px;
     	}
+
+		input {margin-bottom:10px; }
     </style>
 </head>
 

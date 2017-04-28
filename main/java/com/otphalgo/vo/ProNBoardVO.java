@@ -1,6 +1,9 @@
 package com.otphalgo.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ProNBoardVO {
+
 	private int code;
 	// pro_ : pro table
 	private String seller_num;
@@ -11,6 +14,7 @@ public class ProNBoardVO {
 	private int stock;
 	private String image;
 	private int cate_code;
+	MultipartFile imagefile;
 	// bo_ : pro_board table
 	private int seq;
 	private String title;
@@ -20,7 +24,27 @@ public class ProNBoardVO {
 	private String contents_image;
 	private String write_date;
 	private int viewcount;
-	
+
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public String getContents_image() {
+		return contents_image;
+	}
+	public void setContents_image(String contents_image) {
+		this.contents_image = contents_image;
+	}
+	public MultipartFile getImagefile() {
+		return imagefile;
+	}
+	public void setImagefile(MultipartFile imagefile) {
+		this.imagefile = imagefile;
+		//setImage(imagefile.getOriginalFilename());
+		setContents_image(imagefile.getOriginalFilename());
+	}
 	public int getCode() {
 		return code;
 	}
@@ -51,23 +75,17 @@ public class ProNBoardVO {
 	public void setSizes(String sizes) {
 		this.sizes = sizes;
 	}
-	public double getSal_rate() {
+	public double getSale_rate() {
 		return sale_rate;
 	}
-	public void setSal_rate(double sal_rate) {
-		this.sale_rate = sal_rate;
+	public void setSale_rate(double sale_rate) {
+		this.sale_rate = sale_rate;
 	}
 	public int getStock() {
 		return stock;
 	}
 	public void setStock(int stock) {
 		this.stock = stock;
-	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
 	}
 	public int getCate_code() {
 		return cate_code;
@@ -105,12 +123,6 @@ public class ProNBoardVO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public String getContents_image() {
-		return contents_image;
-	}
-	public void setContents_image(String contents_image) {
-		this.contents_image = contents_image;
-	}
 	public String getWrite_date() {
 		return write_date;
 	}
@@ -123,13 +135,15 @@ public class ProNBoardVO {
 	public void setViewcount(int viewcount) {
 		this.viewcount = viewcount;
 	}
+	
 	@Override
 	public String toString() {
-		return "ProductVO [code=" + code + ", seller_num=" + seller_num + ", name=" + name + ", price=" + price
-				+ ", sizes=" + sizes + ", sal_rate=" + sale_rate + ", stock=" + stock + ", image=" + image
-				+ ", cate_code=" + cate_code + ", seq=" + seq + ", title=" + title + ", sub_title=" + sub_title
-				+ ", writer_num=" + writer_num + ", contents=" + contents + ", contents_image=" + contents_image
-				+ ", write_date=" + write_date + ", viewcount=" + viewcount + "]";
+		return "ProNBoardVO [code=" + code + ", seller_num=" + seller_num + ", name=" + name + ", price=" + price
+				+ ", sizes=" + sizes + ", sale_rate=" + sale_rate + ", stock=" + stock + ", image=" + image
+				+ ", cate_code=" + cate_code + ", imagefile=" + imagefile + ", seq=" + seq + ", title=" + title
+				+ ", sub_title=" + sub_title + ", writer_num=" + writer_num + ", contents=" + contents
+				+ ", contents_image=" + contents_image + ", write_date=" + write_date + ", viewcount=" + viewcount
+				+ "]";
 	}
 	
 }
