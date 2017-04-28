@@ -17,14 +17,12 @@ public class JoinInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		
 		// servlet-context.xml <interceptor> 확인
-		
-		log.info("preHandle ------------------------ ");
 
 		HttpSession session = request.getSession();
-		
+			
 		if(session.getAttribute("user") != null){
 			
-			log.info("인터셉터 : 로그인 된 유저가 있음 -> 회원가입창 접근 실패, 메인으로 돌아가기");
+			log.info("인터셉터 : 메인으로 가기 (로그인함)");
 			
 			response.sendRedirect("/controller");
 			return false;

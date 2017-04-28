@@ -7,7 +7,9 @@
 	<typeAliases>
 		<typeAlias alias="buyvo" type="com.otphalgo.vo.BuyerVO" />
 		<typeAlias alias="sellvo" type="com.otphalgo.vo.SellerVO"/>
-		<typeAlias alias="procategoryvo" type="com.otphalgo.vo.ProCategoryVO"/>
 		<typeAlias alias="memvo" type="com.otphalgo.vo.MemberVO"/>
+		<typeAlias alias="procategoryvo" type="com.otphalgo.vo.ProCategoryVO"/>
+		<typeAlias alias="pronboardvo" type="com.otphalgo.vo.ProNBoardVO"/>
+
 	</typeAliases>
 </configuration>

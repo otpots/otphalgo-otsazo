@@ -2,34 +2,46 @@
     pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/common/header.jsp"%>
 
+<section id="do_action">
 <div class="container">
+	<div class="breadcrumbs">
+		<ol class="breadcrumb">
+			<li><a href="#">Home</a></li>
+			<li class="active">로그인</li>
+		</ol>
+	</div>
+<section id="form">
+<div class="row">
+
 	<div class="col-sm-4"></div>
 	<div class="col-sm-4" id="center">
-		<form action="userlogin" method="post">
-		<div class="col-sm-12">
-			<label for="id">아이디:</label> 
-			<input type="text" class="form-control" id="input_id" name="id">
-		</div>
-		<div class="col-sm-12">
-			<label for="id">비밀번호:</label> 
-			<input type="password" class="form-control" id="input_pw" name="pw">
-		</div>
-        <div class="col-sm-12">
-        	<div class="alert alert-danger" style="margin-top: 20px; display:none;" id="result_login">
-				<strong></strong>
+		<form action="#" method="post">
+			<div class="col-sm-12">
+			<input type="text" class="form-control" id="input_id" name="id" placeholder="아이디"></div>
+			
+			<div class="col-sm-12">
+			<input type="password" class="form-control" id="input_pw" name="pw" placeholder="비밀번호"></div>
+			
+	        <div class="col-sm-12">
+	        	<div class="alert alert-danger" style="margin-top: 20px; display:none;" id="result_login">
+					<strong></strong></div></div>
+	        
+			<div class="col-sm-12" style="margin-top: 20px;">
+				<a href="javascript:loginCheckAjax()" class="btn btn-default btn-block" role="button">로그인</a>
+				<a href="join" class="btn btn-default btn-block" role="button">회원가입</a>
 			</div>
-        </div>
-		<div class="col-sm-12">
-			<button type="button" class="btn btn-default btn-block" id="btn_login" style="margin-top: 20px; padding: 15px;">로그인</button>
-            <button type="button" class="btn btn-block" style="margin-top: 10px; padding: 15px;" id="btn_join">회원가입</button>
-		</div>
 		</form>
+		
         <div class="clo-sm-12" align="right">
-        	<button type="button" class="btn btn-link" id="btn_find" style="margin-top: 10px;">아이디/비밀번호를 잊어버리셨나요?</button>
+        	<a href="find" class="btn btn-default btn-link" role="button">아이디/비밀번호를 잊어버리셨나요?</a>
         </div>       
 	</div>
 	<div class="col-sm-4"></div>
+
 </div>
+</section>
+</div>
+</section>
 
 <script type="text/javascript">
 var backpage = "/controller<%=(String)session.getAttribute("backpage")%>"
@@ -52,19 +64,6 @@ function loginCheckAjax(){
  	});
  	
  }
-$(document).ready(function(){
-
-	$('#btn_join').on('click', function(){
-		$(location).attr('href', 'join');
-	});	
-	$('#btn_find').on('click', function(){
-		$(location).attr('href', 'find');
-	});
-	$('#btn_login').on('click', function(){
- 		loginCheckAjax();
- 	});
-
-});
 </script>
 
 <%@include file="/WEB-INF/views/common/footer.jsp"%>
