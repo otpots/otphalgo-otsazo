@@ -1,27 +1,30 @@
 package com.otphalgo.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.otphalgo.service.CartService;
+import com.otphalgo.vo.CartVO;
+import com.otphalgo.vo.MemberVO;
+import com.otphalgo.vo.ProNBoardVO;
 
 @Controller
 public class CartController {
+		
+	@Autowired
+	CartService cartService;
 	
-	final Logger log = LoggerFactory.getLogger(CartController.class);
-	
-/*	@Autowired
-	CartService service;*/
-	
-/*	@RequestMapping("cart")
-	public ModelAndView cart(MemberVO mvo, CartVO cvo){
-		log.info(mvo.toString());
-		log.info(cvo.toString());
+	@RequestMapping("cart")
+	public ModelAndView cart(CartVO cvo){
 		ModelAndView mav = new ModelAndView();
-		List<CartVO> cartList = service.selectAllCart(mvo);
-		List<ProNBoardVO> proList = service.selectAllPro(cvo);
-		mav.addObject("cartList", cartList);
-		mav.addObject("proList",  proList);
-		mav.setViewName("cart/cart");
+		//still working on it : Song
+		//List<ProNBoardVO> cartItemsList = cartService.selectAllCart(cvo);
+		//mav.addObject("cartItemsList",  cartItemsList);
+		//mav.setViewName("cart/cart");
 		return mav;
-	}*/
+	}
 }

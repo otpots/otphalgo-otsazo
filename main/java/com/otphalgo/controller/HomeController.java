@@ -7,21 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.otphalgo.service.ProCategoryService;
-import com.otphalgo.vo.ProCategoryVO;
+import com.otphalgo.service.ProNBoardService;
+import com.otphalgo.vo.ProNBoardVO;
 
 @Controller
 public class HomeController {
 	    
     @Autowired
-    ProCategoryService proCategoryService;
+    ProNBoardService proNBoardService;
     
     @RequestMapping("/")
     public ModelAndView home() {
         ModelAndView mav = new ModelAndView();
-        List<ProCategoryVO> list = proCategoryService.selectProCategoryAll();
-        //영철이 오면 mapper쓰는거 물어보고, 서비스 어떤식으로 만들었는지도 물어보기
-        mav.addObject("list", list);
+        // need to change it to connecting the board, not the product
+        List<ProNBoardVO> featuresItemsList = proNBoardService.selectAllPro();
+        mav.addObject("featuresItemsList", featuresItemsList);
         mav.setViewName("home");
         return mav;
     }

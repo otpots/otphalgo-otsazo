@@ -1,114 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Shopping Cart | Otphalgo, Otsazo</title>
-</head>
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<body>
+<%@include file="/WEB-INF/views/common/header.jsp"%>
+
 	<section id="cart_items">
 		<div class="container">
-			<div class="breadcrumbs">
+			<div class="breadcrumbs"><!-- 경로(빵조각) -->
 				<ol class="breadcrumb">
 				  <li><a href="#">Home</a></li>
 				  <li class="active">Shopping Cart</li>
 				</ol>
-			</div>
+			</div><!-- 경로(빵조각) -->
+			
 			<div class="table-responsive cart_info">
-				<table class="table table-condensed">
-					<thead>
+				<table class="table table-condensed"><!-- cart table -->
+					<thead><!-- table head -->
 						<tr class="cart_menu">
-							<td class="image">Item</td>
+							<td class="image">상품</td>
 							<td class="description"></td>
-							<td class="price">Price</td>
-							<td class="quantity">Quantity</td>
-							<td class="total">Total</td>
+							<td class="price">가격</td>
+							<td class="quantity">수량</td>
+							<td class="total">총</td>
 							<td></td>
 						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/one.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/two.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/three.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-					</tbody>
+					</thead><!-- table head -->
+					
+					<tbody><!-- table body-->
+						
+						<c:forEach var="item" items="${cartItemsList }">
+						<c:set var="total" value="0"/>
+							<tr>
+								<td class="cart_product">
+									<a href=""><img src="images/cart/${item.image }" alt=""></a>
+								</td>
+								<td class="cart_description">
+									<h4><a href="">${item.name }</a></h4>
+									<p>${item }</p>
+								</td>
+								<td class="cart_price">
+									<p>${item.price }</p>
+								</td>
+								<td class="cart_quantity">
+									<div class="cart_quantity_button">
+										<a class="cart_quantity_down" href=""> - </a>
+										<input class="cart_quantity_input" type="text" name="quantity" value="${item.count }" autocomplete="off" size="2">
+										<a class="cart_quantity_up" href=""> + </a>
+									</div>
+								</td>
+								<td class="cart_total">
+									<c:set var="total" value="${total + item.price * item.count }"/>
+									<p class="cart_total_price"><c:out value="${total }"/></p>
+								</td>
+								<td class="cart_delete">
+									<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody><!-- table body -->
+					
 				</table>
 			</div>
 		</div>
 	</section> <!--/#cart_items-->
-</body>
-</html>
+	
+<%@include file="/WEB-INF/views/common/footer.jsp"%>
