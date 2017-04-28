@@ -4,17 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="cart">
-	<!-- <select id="selectall" resultType="cartvo">
-		select p.code, p.name, p.price, p.image, c.count, p.price*c.count total from pro p, cart c where p.code=c.pro_code and c.buyer_num='#{buyer_num}';
-	</select> -->
-	<select id="selectAllCart" parameterType="memvo" resultType="cartvo">
-		select * from cart where buyer_num=#{num}
-	</select>
-	<select id="selectAllPro" parameterType="cartvo" resultType="pronboardvo">
-		select * from pro where code=#{code}
+	
+	<select id="selectCertainCart" parameterType="cartvo" resultType="cartvo">
+		select c.num, pb.seq, pb.thumbnail_image, c.code, p.name, p.price, c.count from cart c, pro_board pb, pro p where c.code=p.code and p.code=pb.code and c.num=#{num} 
 	</select>
 	
-	<insert id="insert" parameterType="cartvo">
-		insert into cart values(#{buyer_num}, #{pro_code},#{count})
-	</insert>
 </mapper>

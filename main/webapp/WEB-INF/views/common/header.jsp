@@ -95,7 +95,7 @@
 							<%}
 							%>
 							<li><a href="mypage"><i class="fa fa-star"></i> 마이페이지</a></li>
-							<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
+							<li><a href="cart"><i class="fa fa-shopping-cart"></i> 장바구니</a></li>
 						</ul>
 					</div>
 				</div>

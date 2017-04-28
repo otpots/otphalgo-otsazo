@@ -8,5 +8,5 @@ import com.otphalgo.vo.ProNBoardVO;
 
 public interface CartService {
 	
-	List<CartVO> selectAllCart(MemberVO mvo);
+	List<CartVO> selectCertainCart(CartVO cvo);
 }
