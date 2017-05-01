@@ -11,9 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.otphalgo.service.BuyerService;
 import com.otphalgo.service.EmailService;
-import com.otphalgo.service.SellerService;
+import com.otphalgo.service.MemberService;
 import com.otphalgo.vo.EmailVO;
 import com.otphalgo.vo.MemberVO;
 
@@ -23,16 +22,14 @@ public class EmailController {
 	@Autowired
 	EmailService emailservice;
 	@Autowired
-	SellerService sellerservice;
-	@Autowired
-	BuyerService buyerservice;
+	MemberService memberservice;
 	
 	static final Logger log = LoggerFactory.getLogger(EmailController.class);
 	
 	@RequestMapping(value="/sendemail", method=RequestMethod.GET)
 	public String sendEmailform(String id, String email, HttpSession session) throws Exception{
 		
-		log.info((String)session.getAttribute("ranNum"));
+		log.info("인증번호 : "+(String)session.getAttribute("ranNum"));
 		
 		if(session.getAttribute("ranNum") == null){
 			EmailVO evo = new EmailVO();
@@ -67,21 +64,15 @@ public class EmailController {
 	@RequestMapping(value="/sendfind", method=RequestMethod.GET)
 	public String sendFind(MemberVO mvo) throws Exception{
 		
-		log.info("email 입력된 membervo : "+mvo.toString());
+		MemberVO resultvo = memberservice.selectOneMember(mvo);
 		
-		MemberVO svo = sellerservice.selectSellerCheck(mvo);
-		MemberVO bvo = buyerservice.selectBuyerCheck(mvo);
+		log.info("id/pw 찾기에 입력된 membervo : "+resultvo.toString());
 		
 		EmailVO evo = new EmailVO();
+		evo.setReceiver(resultvo.getEmail());
 		evo.setTitle("문의하신 OtphalgoOtsazo 의 회원정보를 찾았습니다!");
-		evo.setReceiver(mvo.getEmail());
-		
-		if(svo != null){
-			evo.setContent("확인 결과 <br>아이디는 "+svo.getId()+" <br>비밀번호는 "+svo.getPw()+" 입니다.");
-		} else if(bvo != null){
-			evo.setContent("확인 결과 <br>아이디는 "+bvo.getId()+" <br>비밀번호는 "+bvo.getPw()+" 입니다.");
-		}
-		
+		evo.setContent("확인 결과 <br>아이디는 "+resultvo.getId()+" <br>비밀번호는 "+resultvo.getPw()+" 입니다.");
+
 		emailservice.sendEmail(evo);
 		
 		return "login/memberfindsuccess";
