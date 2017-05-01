@@ -10,6 +10,6 @@
 		<typeAlias alias="memvo" type="com.otphalgo.vo.MemberVO"/>
 		<typeAlias alias="procategoryvo" type="com.otphalgo.vo.ProCategoryVO"/>
 		<typeAlias alias="pronboardvo" type="com.otphalgo.vo.ProNBoardVO"/>
-
+		<typeAlias alias="cartvo" type="com.otphalgo.vo.CartVO"/>
 	</typeAliases>
 </configuration>
