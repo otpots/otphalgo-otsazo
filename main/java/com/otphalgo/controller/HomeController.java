@@ -19,10 +19,13 @@ public class HomeController {
     @RequestMapping("/")
     public ModelAndView home(HttpSession session) {
         ModelAndView mav = new ModelAndView();
-        MemberVO mvo = new MemberVO();
+        
+        //for the test (login)
+        /*MemberVO mvo = new MemberVO();
         mvo.setNum("test_member_001");
         mvo.setId("test_001");
-        session.setAttribute("user", mvo);
+        session.setAttribute("user", mvo);*/
+        
         // need to change it to connecting the board, not the product
         //List<ProNBoardVO> featuresItemsList = proNBoardService.selectAllPro();
         //mav.addObject("featuresItemsList", featuresItemsList);

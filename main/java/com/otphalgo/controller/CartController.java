@@ -36,4 +36,18 @@ public class CartController {
 		mav.setViewName("cart/cart");
 		return mav;
 	}
+	
+	@RequestMapping("/payment")
+	public ModelAndView payment(HttpSession session){
+		ModelAndView mav = new ModelAndView();
+		log.info(session.getAttribute("user").toString());
+		MemberVO mvo = (MemberVO)session.getAttribute("user");
+		CartVO cvo = new CartVO();
+		cvo.setNum(mvo.getNum());
+		log.info(cvo.toString());
+		List<CartVO> cartItemsList = cartService.selectCertainCart(cvo);
+		mav.addObject("cartItemsList",  cartItemsList);
+		mav.setViewName("cart/payment");
+		return mav;
+	}
 }
