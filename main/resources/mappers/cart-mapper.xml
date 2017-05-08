@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="cart">
+	
+	<select id="selectCertainCart" parameterType="cartvo" resultType="cartvo">
+		select c.num, pb.seq, pb.thumbnail_image, c.code, p.name, p.price, c.count from cart c, pro_board pb, pro p where c.code=p.code and p.code=pb.code and c.num=#{num} 
+	</select>
+	
+</mapper>

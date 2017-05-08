@@ -2,7 +2,60 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<mapper namespace="pro">
 
+<mapper namespace="pro">
+	<!-- rownum이용 최근 작성일 기준으로 pro_board조회하기 -->
+	<select id="selectProductAll" parameterType="hashmap"
+		resultType="pronboardvo">
+		select code, seq, title, sub_title, writer_num, contents,
+		contents_image, write_date, viewcount
+		from (select rownum r, code, seq, title, sub_title, writer_num, contents,
+		contents_image, write_date, viewcount
+		from (select * from pro_board order by write_date desc))
+		where code=#{code} and r between
+		<foreach collection="rownum" item="r" separator="and">
+			#{r}
+		</foreach>
+	</select>
+	
+	<!-- added by Song -->
+	<select id="selectAllPro" resultType="pronboardvo">
+		select * from pro
+	</select>
+
+	<select id="countAllBoard" resultType="int">
+		select count(*) from pro_board
+	</select>
+
+	<select id="selectProductOne" parameterType="pronboardvo"
+		resultType="pronboardvo">
+		select * from pro_board where code=#{code}
+	</select>
+	<update id="viewcount" parameterType="pronboardvo">
+		update pro_board set viewcount = viewcount+1 where code=#{code}
+	</update>
+
+	<insert id="insertProduct" parameterType="pronboardvo">
+		insert into pro values
+		(#{code}, #{seller_num}, #{name}, #{price}, #{sizes},#{sale_rate},
+		#{stock}, #{image}, #{cate_code})
+	</insert>
+	<insert id="insertBoard" parameterType="pronboardvo">
+		insert into pro_board values
+		(#{seq}, #{title}, #{sub_title}, #{writer_num}, #{code},#{contents},
+		#{contents_image}, default, 0)
+	</insert>
+
+	<update id="updatePrdouct" parameterType="pronboardvo">
+		update pro set name=#{name}, price=#{price}, sizes=#{sizes},
+		sal_rate=#{sal_rate}, stock=#{stock}, image=#{image},
+		cate_code=#{cate_code}
+		where code=#{code}
+	</update>
+	<update id="updateBoard" parameterType="pronboardvo">
+		update pro_board set title=#{title}, sub_title=#{sub_title},
+		writer_num=#{writer_num},
+		contents=#{contents}, contents_image=#{contents_image}
+		where code=#{code}
+	</update>
 </mapper>

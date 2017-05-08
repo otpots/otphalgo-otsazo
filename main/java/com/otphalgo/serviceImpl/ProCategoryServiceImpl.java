@@ -13,11 +13,11 @@ import com.otphalgo.vo.ProCategoryVO;
 public class ProCategoryServiceImpl implements ProCategoryService {
 
     @Autowired
-    ProCategoryDAO dao;
+    ProCategoryDAO proCategoryDAO;
     
     @Override
     public List<ProCategoryVO> selectProCategoryAll() {
-        return dao.selectProCategoryAll();
+        return proCategoryDAO.selectProCategoryAll();
     }
 
     /*@Override

@@ -28,21 +28,20 @@ public class EmailServiceImpl implements EmailService {
 		MimeMessage msg = mailSender.createMimeMessage();
 		MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
 		
-		log.info("===> EmailVO : "+evo.toString());
+		log.info("EmailVO : "+evo.toString());
 		
 		try{
 			msgHelper.setSubject(evo.getTitle());
 			msgHelper.setText(evo.getContent());
 			msgHelper.setTo(evo.getReceiver());
-			msgHelper.setFrom("bbhh827@gmail.com");
-			log.info("정보입력함");
+			msgHelper.setFrom("otphalgootsazo@gmail.com");
 		} catch(MessagingException e){
 			log.info("===> MessagingException : 메세지 입력하는 동안 에러 발생");
 			e.printStackTrace();
 		}
 		try{
 			mailSender.send(msg);
-			log.info("메일보냄");
+			log.info("메일전송 완료");
 		} catch(MailException e){
 			log.info("===> MailException : 메일 보내는 동안 에러 발생");
 			e.printStackTrace();

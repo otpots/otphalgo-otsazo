@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-	import="java.util.List, com.otphalgo.vo.ProCategoryVO"%>
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@include file="/WEB-INF/views/common/header.jsp"%>
@@ -90,9 +89,33 @@
 				<div class="features_items">
 					<!--features_items-->
 					<h2 class="title text-center">Features Items</h2>
-
+					
+					<c:forEach var="item" items="${featuresItemsList }">
 					<div class="col-sm-3">
-						<!-- 1st pro -->
+						<div class="product-image-wrapper">
+							<div class="single-products">
+								<div class="productinfo text-center">
+									<img src="images/test/${item.image }" alt="" />
+									<h2>${item.price }원</h2>
+									<p>${item.name }</p>
+									<a href="#" class="btn btn-default add-to-cart"><i
+										class="fa fa-shopping-cart"></i>Add to cart</a>
+								</div>
+								<div class="product-overlay">
+									<div class="overlay-content">
+										<h2>${item.price }원</h2>
+										<p>${item.name }</p>
+										<a href="#" class="btn btn-default add-to-cart"><i
+											class="fa fa-shopping-cart"></i>Add to cart</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</c:forEach>
+<!-- 
+					<div class="col-sm-3">
+						1st pro
 						<div class="product-image-wrapper">
 							<div class="single-products">
 								<div class="productinfo text-center">
@@ -113,10 +136,10 @@
 							</div>
 						</div>
 					</div>
-					<!-- 1st pro -->
+					1st pro
 
 					<div class="col-sm-3">
-						<!-- 2nd pro -->
+						2nd pro
 						<div class="product-image-wrapper">
 							<div class="single-products">
 								<div class="productinfo text-center">
@@ -137,10 +160,10 @@
 							</div>
 						</div>
 					</div>
-					<!-- 2nd pro -->
+					2nd pro
 
 					<div class="col-sm-3">
-						<!-- 3rd pro -->
+						3rd pro
 						<div class="product-image-wrapper">
 							<div class="single-products">
 								<div class="productinfo text-center">
@@ -161,10 +184,10 @@
 							</div>
 						</div>
 					</div>
-					<!-- 3rd pro -->
+					3rd pro
 
 					<div class="col-sm-3">
-						<!-- 4th pro -->
+						4th pro
 						<div class="product-image-wrapper">
 							<div class="single-products">
 								<div class="productinfo text-center">
@@ -185,10 +208,10 @@
 							</div>
 						</div>
 					</div>
-					<!-- 4th pro -->
+					4th pro
 
 					<div class="col-sm-3">
-						<!-- 5th pro -->
+						5th pro
 						<div class="product-image-wrapper">
 							<div class="single-products">
 								<div class="productinfo text-center">
@@ -210,10 +233,10 @@
 							</div>
 						</div>
 					</div>
-					<!-- 5th pro -->
+					5th pro
 
 					<div class="col-sm-3">
-						<!-- 6th pro -->
+						6th pro
 						<div class="product-image-wrapper">
 							<div class="single-products">
 								<div class="productinfo text-center">
@@ -235,10 +258,10 @@
 							</div>
 						</div>
 					</div>
-					<!-- 6th pro -->
+					6th pro
 
 					<div class="col-sm-3">
-						<!-- 7th pro -->
+						7th pro
 						<div class="product-image-wrapper">
 							<div class="single-products">
 								<div class="productinfo text-center">
@@ -259,10 +282,10 @@
 							</div>
 						</div>
 					</div>
-					<!-- 7th pro -->
+					7th pro
 
 					<div class="col-sm-3">
-						<!-- 8th pro -->
+						8th pro
 						<div class="product-image-wrapper">
 							<div class="single-products">
 								<div class="productinfo text-center">
@@ -283,8 +306,8 @@
 							</div>
 						</div>
 					</div>
-					<!-- 8th pro -->
-
+					8th pro
+ -->
 				</div>
 				<!--features_items-->
 			</div>
