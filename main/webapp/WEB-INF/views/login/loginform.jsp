@@ -44,7 +44,7 @@
 </section>
 
 <script type="text/javascript">
-var backpage = "/controller<%=(String)session.getAttribute("backpage")%>"
+var backpage = "<%=(String)session.getAttribute("backpage")%>"
 function loginCheckAjax(){
  	$.ajax({
 		url : 'logincheck', 

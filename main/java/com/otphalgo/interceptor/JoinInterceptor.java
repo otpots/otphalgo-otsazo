@@ -20,11 +20,13 @@ public class JoinInterceptor extends HandlerInterceptorAdapter {
 
 		HttpSession session = request.getSession();
 			
+		log.info("조인인터셉터 ");
+		
 		if(session.getAttribute("user") != null){
 			
 			log.info("인터셉터 : 메인으로 가기 (로그인함)");
 			
-			response.sendRedirect("/controller");
+			response.sendRedirect("/");
 			return false;
 		}
 		
