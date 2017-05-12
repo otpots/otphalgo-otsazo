@@ -1,23 +1,23 @@
 package com.otphalgo.vo;
 
 public class ProCategoryVO {
-	private int code;
+	private int cate_code;
 	private String name;
 	
 	public ProCategoryVO(){}
 	
-	public ProCategoryVO(int code, String name) {
+	public ProCategoryVO(int cate_code, String name) {
 		super();
-		this.code = code;
+		this.cate_code = cate_code;
 		this.name = name;
 	}
 
-	public int getCode() {
-		return code;
+	public int getCate_code() {
+		return cate_code;
 	}
 
-	public void setCode(int code) {
-		this.code = code;
+	public void setCate_code(int cate_code) {
+		this.cate_code = cate_code;
 	}
 
 	public String getName() {
