@@ -40,7 +40,10 @@
 	
 	<context:component-scan base-package="com.otphalgo.controller" />
 	
-
+	<!-- 파일업로드용 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+     <beans:property name="maxUploadSize" value="10485760"></beans:property> <!-- 파일 업로드의 크기 제한  10mb-->
+    </beans:bean>
 
 	
 </beans:beans>

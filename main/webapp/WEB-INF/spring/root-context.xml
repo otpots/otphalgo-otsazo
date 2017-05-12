@@ -63,5 +63,8 @@
 	</property>
 	</bean>
 	
+	<bean id="uploadPath" class="java.lang.String">
+		<constructor-arg value="C:\\Users\killersin\Desktop\workspace_webproject\otphlgo_otsazo\src\main\webapp\resources\images\product"></constructor-arg>
+	</bean>
 		
 </beans>

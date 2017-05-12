@@ -14,4 +14,11 @@
         select * from pro_category
     </select>
     
+    <select id="classifyProCategory1" resultType="procategoryvo">
+        select * from pro_category where cate_code between 1 and 4
+    </select>
+    
+    <select id="classifyProCategory2" parameterType="procategoryvo" resultType="procategoryvo">
+    	select * from pro_category where cate_code like #{cate_code} || '__'
+    </select>
 </mapper>

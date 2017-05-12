@@ -30,7 +30,12 @@ public class ProCategoryDAO {
     public List<ProCategoryVO> selectProCategoryAll(){
         return session.selectList("cate.selectProCategoryAll");
     }
-    
+    public List<ProCategoryVO> classifyProCategory1() {
+    	return session.selectList("cate.classifyProCategory1");
+    } 
+    public List<ProCategoryVO> classifyProCategory2(int cate_code) {
+    	return session.selectList("cate.classifyProCategory2", cate_code );
+    }
     //만들었는데 필요 없어서 주석처리
     /*public ProCategoryVO selectProCategoryOne(ProCategoryVO pcvo){
         return session.selectOne("cate.selectCategory", pcvo);

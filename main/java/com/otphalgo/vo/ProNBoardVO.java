@@ -1,61 +1,48 @@
 package com.otphalgo.vo;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+@Component
 public class ProNBoardVO {
-
-	private int code;
-	// pro_ : pro table
-	private String seller_num;
+	private String code;
+	private String num;
+	// pro table: code, num, name, price, sizes, stock, color, cate_code
 	private String name;
 	private int price;
 	private String sizes;
-	private double sale_rate;
 	private int stock;
-	private String image;
+	private String color;
 	private int cate_code;
-	MultipartFile imagefile;
-	// bo_ : pro_board table
+	// pro_board table: seq, title, sub_title, num, code, contents, write_date, viewcount, thumbnail_image
 	private int seq;
 	private String title;
 	private String sub_title;
-	private String writer_num;
 	private String contents;
-	private String contents_image;
+	private String thumbnail_image;
 	private String write_date;
 	private int viewcount;
-
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
-	public String getContents_image() {
-		return contents_image;
-	}
-	public void setContents_image(String contents_image) {
-		this.contents_image = contents_image;
-	}
+	private MultipartFile imagefile;
+	
 	public MultipartFile getImagefile() {
 		return imagefile;
 	}
 	public void setImagefile(MultipartFile imagefile) {
 		this.imagefile = imagefile;
-		//setImage(imagefile.getOriginalFilename());
-		setContents_image(imagefile.getOriginalFilename());
+		setThumbnail_image(imagefile.getOriginalFilename());
 	}
-	public int getCode() {
+	
+	public String getCode() {
 		return code;
 	}
-	public void setCode(int code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
-	public String getSeller_num() {
-		return seller_num;
+	public String getNum() {
+		return num;
 	}
-	public void setSeller_num(String seller_num) {
-		this.seller_num = seller_num;
+	public void setNum(String num) {
+		this.num = num;
 	}
 	public String getName() {
 		return name;
@@ -75,17 +62,17 @@ public class ProNBoardVO {
 	public void setSizes(String sizes) {
 		this.sizes = sizes;
 	}
-	public double getSale_rate() {
-		return sale_rate;
-	}
-	public void setSale_rate(double sale_rate) {
-		this.sale_rate = sale_rate;
-	}
 	public int getStock() {
 		return stock;
 	}
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
 	}
 	public int getCate_code() {
 		return cate_code;
@@ -111,17 +98,17 @@ public class ProNBoardVO {
 	public void setSub_title(String sub_title) {
 		this.sub_title = sub_title;
 	}
-	public String getWriter_num() {
-		return writer_num;
-	}
-	public void setWriter_num(String writer_num) {
-		this.writer_num = writer_num;
-	}
 	public String getContents() {
 		return contents;
 	}
 	public void setContents(String contents) {
 		this.contents = contents;
+	}
+	public String getThumbnail_image() {
+		return thumbnail_image;
+	}
+	public void setThumbnail_image(String thumbnail_image) {
+		this.thumbnail_image = thumbnail_image;
 	}
 	public String getWrite_date() {
 		return write_date;
@@ -138,12 +125,10 @@ public class ProNBoardVO {
 	
 	@Override
 	public String toString() {
-		return "ProNBoardVO [code=" + code + ", seller_num=" + seller_num + ", name=" + name + ", price=" + price
-				+ ", sizes=" + sizes + ", sale_rate=" + sale_rate + ", stock=" + stock + ", image=" + image
-				+ ", cate_code=" + cate_code + ", imagefile=" + imagefile + ", seq=" + seq + ", title=" + title
-				+ ", sub_title=" + sub_title + ", writer_num=" + writer_num + ", contents=" + contents
-				+ ", contents_image=" + contents_image + ", write_date=" + write_date + ", viewcount=" + viewcount
-				+ "]";
+		return "ProNBoardVO [code=" + code + ", num=" + num + ", name=" + name + ", price=" + price + ", sizes=" + sizes
+				+ ", stock=" + stock + ", color=" + color + ", cate_code=" + cate_code + "프로보드테이블: seq=" + seq + ", title="
+				+ title + ", sub_title=" + sub_title + ", contents=" + contents + ", thumbnail_image=" + thumbnail_image
+				+ ", write_date=" + write_date + ", viewcount=" + viewcount + ", imagefile=" + imagefile + "]";
 	}
 	
-}
+}	

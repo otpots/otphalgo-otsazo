@@ -13,13 +13,20 @@ import com.otphalgo.vo.ProCategoryVO;
 public class ProCategoryServiceImpl implements ProCategoryService {
 
     @Autowired
-    ProCategoryDAO proCategoryDAO;
+    ProCategoryDAO pcdao;
     
     @Override
     public List<ProCategoryVO> selectProCategoryAll() {
-        return proCategoryDAO.selectProCategoryAll();
+        return pcdao.selectProCategoryAll();
     }
-
+    @Override
+	public List<ProCategoryVO> classifyProCategory1() {
+		return pcdao.classifyProCategory1();
+	}
+    @Override
+	public List<ProCategoryVO> classifyProCategory2(int cate_code) {
+		return pcdao.classifyProCategory2(cate_code);
+	}
     /*@Override
     public List<ProCategoryVO> selectProCategoryAll4(ProCategoryVO pcvo) {
         return dao.selectProCategoryAll4(pcvo);

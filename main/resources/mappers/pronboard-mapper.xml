@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pro">
+	<!-- rownum이용 최근 작성일 기준으로 pro_board조회하기 -->
+	<select id="selectBoardAll" parameterType="hashmap" resultType="pronboardvo">
+		select seq, title, sub_title, num, code, contents, write_date, viewcount, thumbnail_image
+		from (select rownum r, seq, title, sub_title, num, code, contents, write_date, viewcount, thumbnail_image
+			  from (select * from pro_board order by write_date asc))	
+		where r between
+		<foreach collection="rownum" item="r" separator="and">
+			#{r} 
+		</foreach> 
+	</select>
+	
+	<select id="selectProductAll" parameterType="hashmap" resultType="pronboardvo">
+		select lpad(code, 8,0) code, num, name, price, sizes, stock, color, cate_code
+		from (select rownum r, lpad(code, 8,0) code, num, name, price, sizes, stock, color, cate_code
+			  from (select * from pro where cate_code=#{cate_code} order by code asc))	
+		where r between
+		<foreach collection="rownum" item="r" separator="and">
+			#{r} 
+		</foreach> 
+	</select>
+	<select id="countAllBoard" resultType="int">
+		select count(*) from pro_board
+	</select>
+	<select id="countAllProduct" resultType="int">
+		select count(*) from pro
+	</select>
+	
+	<select id="selectProductOne" parameterType="pronboardvo" resultType="pronboardvo">
+		select * from pro_board where code=#{code}
+	</select>
+	<update id="viewcount" parameterType="pronboardvo">
+		update pro_board set viewcount = viewcount+1  where code=#{code}
+	</update>
+	
+	<insert id="insertProduct" parameterType="pronboardvo">
+		insert into pro values
+		( pro_code.nextval, #{num}, #{name}, #{price}, #{color}, 
+			#{sizes}, #{stock}, #{cate_code} )
+	</insert>
+	<insert id="insertBoard" parameterType="pronboardvo">
+		insert into pro_board values
+		( proboard_seq.nextval, #{title}, #{sub_title}, #{num}, proboard_code.nextval,
+			#{contents}, #{thumbnail_image}, default, 0 )
+	</insert>
+	
+	<update id="updatePrdouct" parameterType="pronboardvo">
+		update pro set name=#{name}, price=#{price}, sizes=#{sizes},
+		sal_rate=#{sal_rate}, stock=#{stock}, color=#{color}, cate_code=#{cate_code}
+		where code=#{code}
+	</update>
+	<update id="updateBoard" parameterType="pronboardvo">
+		update pro_board set title=#{title}, sub_title=#{sub_title}, num=#{num},
+		contents=#{contents}, thumnail_image=#{thumnail_image}
+		where code=#{code}
+	</update>
+</mapper>
