@@ -45,7 +45,7 @@ public class Summer2Controller {
 		
 		if(multipartFile != null && !(multipartFile.getOriginalFilename().equals(""))) {
 	        // 폴더 생성 + 파일 저장 // return값 : 브라우저상의 이미지주소 (http://ip.port/ 다음부터)
-			Map<String, Object> urlpath = SummerUploadUtils.uploadFile(uploadPath, multipartFile/*multipartFile.getOriginalFilename(), multipartFile.getBytes()*/);       
+			Map<String, Object> urlpath = SummerUploadUtils.uploadFile(uploadPath, multipartFile);       
 	        if((int)urlpath.get("result") == -1){
 	        	fileInfo.put("result", -1);
 	        	return new ResponseEntity<Object>(fileInfo, HttpStatus.NOT_ACCEPTABLE);
@@ -63,10 +63,8 @@ public class Summer2Controller {
 		        fileInfo.put("fileextension",urlpath.get("formatName"));     //파일확장자
 		        fileInfo.put("result", 1);
 	        }
-		}
-		
-		return new ResponseEntity<Object>(fileInfo, HttpStatus.CREATED);		
-		
+		}	
+		return new ResponseEntity<Object>(fileInfo, HttpStatus.CREATED);			
 	}
 	
    //byte[]데이터가 그대로 전송될 것을 명시해준다.

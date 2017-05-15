@@ -13,34 +13,21 @@
 </style>
 </head>
 <body>
-<h2>게시판 조회화기</h2>
-<table>
-<th>번호</th> <th>제목</th> <th>부제목</th> <th>작성자번호</th> <th>코드</th>
-<th>내용</th> <th>이미지</th> <th>작성일자</th> <th>조회수</th>
-<c:forEach items="${proboardlist }" var="pbl">
-	<tr> 
-		<td>${pbl.seq }</td> <td>${pbl.title }</td> 
-		<td>${pbl.sub_title }</td> <td>${pbl.num }</td>
-		<td>${pbl.code }</td> <td>${pbl.contents }</td> 
-		<td><img id='image' src='images/product/${pbl.thumbnail_image }' width=200 height=150></td>
-		<td>${pbl.write_date }</td> <td>${pbl.viewcount }</td>		  
-	</tr>
-</c:forEach>
-</table>
 
 <h2>상품 조회화기</h2>
 <table>
-<th>커드</th> <th>셀러넘</th> <th>이름</th> <th>가격</th>
-<th>사이즈</th> <th>재고</th> <th>카테고리코드</th> <th>색상</th> 
-<c:forEach items="${prolist }" var="pro">
-	<tr> 
-		<td>${pro.code }</td> <td>${pro.num }</td> 
-		<td>${pro.name }</td> <td>${pro.price }</td>
-		<td>${pro.sizes }</td> <td>${pro.stock}</td> 
-		<td>${pro.cate_code }</td>	<td>${pro.color }</td>	  
+	<c:forEach items="${prolist }" var="pro">
+	<tr>
+	 <td><img id='image' src='images/product/${pro.thumbnail_image }' width=200 height=150></td>
 	</tr>
-</c:forEach>
-</table>
+	<tr>
+	 <td>${pro.name }</td>
+	</tr>
+	<tr>
+	 <td>${pro.price }원</td>
+	</tr>
+	</c:forEach>
+</table> 
 
 <%
 //페이지 번호를 나타내기위한 구성 총게시물수와 보여줄게시물수

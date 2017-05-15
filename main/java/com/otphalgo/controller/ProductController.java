@@ -2,11 +2,7 @@ package com.otphalgo.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -27,30 +23,54 @@ import com.otphalgo.vo.ProNBoardVO;
 
 @Controller
 public class ProductController {
-private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
-	
-	@Resource(name="uploadPath") 
-	private String uploadPath;
+	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	
 	@Autowired
 	ProNBoardService proservice;
 	@Autowired
 	ProCategoryService proCategoryService;
 	
+	//모든 상품 조회
 	@RequestMapping("/listproduct")
 	public ModelAndView selectProductAll(
 			@RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum, 
-			@RequestParam(value="recordPerPage", required=false, defaultValue="5") int recordPerPage, 
-			@RequestParam(value="cate_code", required=false, defaultValue="2") int cate_code){
+			@RequestParam(value="recordPerPage", required=false, defaultValue="5") int recordPerPage){
 		ModelAndView mav = new ModelAndView();
-		List<ProNBoardVO> prolist = proservice.selectProductAll(pageNum, recordPerPage, cate_code);
+		List<ProNBoardVO> prolist = proservice.selectProductAll(pageNum, recordPerPage);
 		List<ProNBoardVO> proboardlist = proservice.selectBoardAll(pageNum, recordPerPage);
 		int procount = proservice.countAllProduct();
 		mav.addObject("prolist", prolist);
 		mav.addObject("proboardlist", proboardlist);
 		mav.addObject("recordPerPage", recordPerPage);
 		mav.addObject("procount", procount);
-		mav.setViewName("pronboard/productList");
+		mav.setViewName("pronboard/pronboardList");
+		return mav;
+	}
+		
+	//카테고리별 상품 조회
+	@RequestMapping("/listproduct2")
+	public ModelAndView selectProductAll2(
+			@RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum, 
+			@RequestParam(value="recordPerPage", required=false, defaultValue="5") int recordPerPage, 
+			@RequestParam(value="cate_code", required=false, defaultValue="2") int cate_code){
+		ModelAndView mav = new ModelAndView();
+		List<ProNBoardVO> prolist = proservice.selectProductAll2(pageNum, recordPerPage, cate_code);
+		int procount = proservice.countAllProduct();
+		mav.addObject("prolist", prolist);
+		mav.addObject("recordPerPage", recordPerPage);
+		mav.addObject("procount", procount);
+		mav.setViewName("pronboard/pronboardList");
+		return mav;
+	}
+	
+	@RequestMapping("/detailproduct")
+	public ModelAndView selectProductOne(int code){
+		ProNBoardVO pnbvo = proservice.selectProductOne(code);
+		ProNBoardVO pnbvo2 = proservice.selectBoardOne(code);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pnbvo", pnbvo);
+		mav.addObject("pnbvo2", pnbvo2);
+		mav.setViewName("pronboard/productdetail");
 		return mav;
 	}
 	

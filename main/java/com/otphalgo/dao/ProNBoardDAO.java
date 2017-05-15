@@ -21,7 +21,15 @@ public class ProNBoardDAO {
         return session.selectList("pro.selectAllPro");
     }*/
     
-    public List<ProNBoardVO> selectProductAll(int pageNum, int recordPerPage, int cate_code){
+    public List<ProNBoardVO> selectProductAll(int pageNum, int recordPerPage){
+		int startRownum = recordPerPage*(pageNum-1)+1; 
+		int endRownum = pageNum*recordPerPage;
+		int[] rownum = {startRownum, endRownum};
+		List<ProNBoardVO> list = session.selectList("pro.selectProductAll", rownum);
+		return list;
+	}
+	
+	public List<ProNBoardVO> selectProductAll2(int pageNum, int recordPerPage, int cate_code){
 		int startRownum = recordPerPage*(pageNum-1)+1; 
 		int endRownum = pageNum*recordPerPage;
 		List<Integer> rownum = new ArrayList<Integer>();
@@ -30,18 +38,14 @@ public class ProNBoardDAO {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("cate_code", cate_code);
 		map.put("rownum", rownum);
-		List<ProNBoardVO> list = session.selectList("pro.selectProductAll", map);
+		List<ProNBoardVO> list = session.selectList("pro.selectProductAll2", map);
 		return list;	
 	}
 	public List<ProNBoardVO> selectBoardAll(int pageNum, int recordPerPage){
 		int startRownum = recordPerPage*(pageNum-1)+1; 
 		int endRownum = pageNum*recordPerPage;
-		List<Integer> rownum = new ArrayList<Integer>();
-		rownum.add(startRownum);
-		rownum.add(endRownum);
-		HashMap<String, List<Integer>> map = new HashMap<String, List<Integer>>();
-		map.put("rownum", rownum);
-		List<ProNBoardVO> list = session.selectList("pro.selectBoardAll", map);
+		int[] rownum = {startRownum, endRownum};
+		List<ProNBoardVO> list = session.selectList("pro.selectBoardAll", rownum);
 		return list;	
 	}
 
@@ -53,10 +57,14 @@ public class ProNBoardDAO {
 		int cnt = session.selectOne("pro.countAllProduct");
 		return cnt;
 	}
-	public List<ProNBoardVO> selectProductOne(ProNBoardVO pnbvo){
-		session.update("pro.viewcount", pnbvo);
-		List<ProNBoardVO> list = session.selectOne("pro.selectProductOne", pnbvo);
-		return list;
+	public ProNBoardVO selectProductOne(int code){
+		ProNBoardVO pnbvo = session.selectOne("pro.selectProductOne", code);
+		return pnbvo;
+	}
+	public ProNBoardVO selectBoardOne(int code){
+		session.update("pro.viewcount", code);
+		ProNBoardVO pnbvo = session.selectOne("pro.selectBoardOne", code);
+		return pnbvo;
 	}
 	public void insertProduct(ProNBoardVO pnbvo){
 		session.insert("pro.insertProduct", pnbvo);

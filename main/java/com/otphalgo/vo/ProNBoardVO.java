@@ -14,12 +14,12 @@ public class ProNBoardVO {
 	private int stock;
 	private String color;
 	private int cate_code;
+	private String thumbnail_image;
 	// pro_board table: seq, title, sub_title, num, code, contents, write_date, viewcount, thumbnail_image
 	private int seq;
 	private String title;
 	private String sub_title;
 	private String contents;
-	private String thumbnail_image;
 	private String write_date;
 	private int viewcount;
 	private MultipartFile imagefile;
