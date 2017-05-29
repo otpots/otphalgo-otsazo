@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="proqna">
+	<select id="selectProQna" resultType="proqnavo">
+		select * from pro_qna where code=#{code}
+	</select>
+	
+	<select id="selectProQnaOne" parameterType="int" resultType="proqnavo">
+		select * from pro_qna where seq=#{seq}
+	</select>
+	
+	<insert id="insertProQna" parameterType="proqnavo">
+		insert into pro_qna values(proqna_seq.nextval, #{code}, default, #{id}, 
+			#{contents}, default, default, #{type})
+	</insert>
+	
+	<delete id="deleteProQna" parameterType="int">
+		delete from pro_qna where seq=#{seq}
+	</delete>
+</mapper>

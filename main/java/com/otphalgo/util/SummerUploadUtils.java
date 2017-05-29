@@ -16,15 +16,15 @@ import org.springframework.web.multipart.MultipartFile;
 public class SummerUploadUtils {	
 	private static final Logger logger = LoggerFactory.getLogger(SummerUploadUtils.class);
 
-	public static Map<String, Object> uploadFile(String uploadPath, MultipartFile multipartFile/*String originalName, byte[] fileData*/) throws Exception{
+	public static Map<String, Object> uploadFile(String uploadPath, MultipartFile multipartFile) throws Exception{
 		String originalName = multipartFile.getOriginalFilename();
 		byte[] fileData = multipartFile.getBytes();
 		Map<String, Object> resultInfo = new HashMap<String, Object>();
-		// uploadPath : ê¸°ë³¸ ì €ì¥ ê²½ë¡œ
-		// originalName : ì—…ë¡œë“œ í•œ íŒŒì¼ ì´ë¦„
-		// fileData : íŒŒì¼ í¬ê¸°
-		
-		// í™•ì¥ì í™•ì¸ (ì´ë¯¸ì§€íŒŒì¼ ì•„ë‹ˆë©´ ì—…ë¡œë“œ X)
+		// uploadPath : ±âº» ÀúÀå °æ·Î
+		// originalName : ¾÷·Îµå ÇÑ ÆÄÀÏ ÀÌ¸§
+		// fileData : ÆÄÀÏ Å©±â
+				
+		// È®ÀåÀÚ È®ÀÎ (ÀÌ¹ÌÁöÆÄÀÏ ¾Æ´Ï¸é ¾÷·Îµå X)
 		String formatName = originalName.substring(originalName.lastIndexOf(".")+1);
 		if(MediaUtils.getMediaType(formatName) == null){
 			resultInfo.put("result", -1);
@@ -32,22 +32,22 @@ public class SummerUploadUtils {
 		}
 		long filesize = multipartFile.getSize();
         long limitFileSize = 10*1024*1024; 
-        if(limitFileSize < filesize){ // ì—…ë¡œë“œí•œ ì´ë¯¸ì§€ê°€ ì œí•œí•œ ì´ë¯¸ì§€ í¬ê¸°ë³´ë‹¤ í¼
+        if(limitFileSize < filesize){ // ¾÷·ÎµåÇÑ ÀÌ¹ÌÁö°¡ Á¦ÇÑÇÑ ÀÌ¹ÌÁö Å©±âº¸´Ù Å­
         	resultInfo.put("result", -2);
 			return resultInfo;
         }
 		
-		// ì¤‘ë³µë˜ì§€ ì•ŠëŠ” íŒŒì¼ì´ë¦„ ë§Œë“¤ê¸°
-		UUID uid = UUID.randomUUID();		
-		String saveName = (uid.toString()+"_"+originalName).replace(" ", "_");
-		// ë§¤ì¼ ë°”ë€ŒëŠ” ì €ì¥ ê²½ë¡œ ë§Œë“¤ê¸° (/ë…„ë„/ì›”/ì¼)		
-		String savedPath = CalcPath(uploadPath);
-		// ì—…ë¡œë“œí•œ ì´ë¯¸ì§€ë¥¼ ìµœì¢… ì €ì¥ê²½ë¡œì— ìµœì¢… íŒŒì¼ì´ë¦„ìœ¼ë¡œ ë³µì‚¬(ì €ì¥)
-		File target = new File(uploadPath+savedPath, saveName);
-		FileCopyUtils.copy(fileData, target);
-		// ë¸Œë¼ìš°ì €ì— ì°í ì£¼ì†Œ ì´ë¦„ (http://ip.port/ ë‹¤ìŒë¶€í„°)
-		String uploadedFileName = savedPath.replace("\\", "/")+"/"+saveName;	
-		logger.info("uploaded File Name : "+uploadedFileName);
+        // Áßº¹µÇÁö ¾Ê´Â ÆÄÀÏÀÌ¸§ ¸¸µé±â
+        UUID uid = UUID.randomUUID();		
+     	String saveName = (uid.toString()+"_"+originalName).replace(" ", "_");
+     	// ¸ÅÀÏ ¹Ù²î´Â ÀúÀå °æ·Î ¸¸µé±â (/³âµµ/¿ù/ÀÏ)		
+     	String savedPath = CalcPath(uploadPath);
+     	// ¾÷·ÎµåÇÑ ÀÌ¹ÌÁö¸¦ ÃÖÁ¾ ÀúÀå°æ·Î¿¡ ÃÖÁ¾ ÆÄÀÏÀÌ¸§À¸·Î º¹»ç(ÀúÀå)
+     	File target = new File(uploadPath+savedPath, saveName);
+     	FileCopyUtils.copy(fileData, target);
+     	// ºê¶ó¿ìÀú¿¡ ÂïÈú ÁÖ¼Ò ÀÌ¸§ (http://ip.port/ ´ÙÀ½ºÎÅÍ)
+     	String uploadedFileName = savedPath.replace("\\", "/")+"/"+saveName;	
+     	//logger.info("uploaded File Name : "+uploadedFileName);
 	
 		resultInfo.put("result", 1);
 		resultInfo.put("urlpath", uploadedFileName);

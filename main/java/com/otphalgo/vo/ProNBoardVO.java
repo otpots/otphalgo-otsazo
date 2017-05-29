@@ -5,20 +5,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class ProNBoardVO {
-	private String code;
-	private String num;
-	// pro table: code, num, name, price, sizes, stock, color, cate_code
+	private int code;
+	private String id;
+	// pro table: code, id, name, price, color, cate_code
 	private String name;
 	private int price;
-	private String sizes;
-	private int stock;
-	private String color;
 	private int cate_code;
 	private String thumbnail_image;
-	// pro_board table: seq, title, sub_title, num, code, contents, write_date, viewcount, thumbnail_image
+	// pro_board table: seq, title, sub_title, id, code, contents, write_date, viewcount, thumbnail_image
 	private int seq;
 	private String title;
-	private String sub_title;
 	private String contents;
 	private String write_date;
 	private int viewcount;
@@ -32,17 +28,17 @@ public class ProNBoardVO {
 		setThumbnail_image(imagefile.getOriginalFilename());
 	}
 	
-	public String getCode() {
+	public int getCode() {
 		return code;
 	}
-	public void setCode(String code) {
+	public void setCode(int code) {
 		this.code = code;
 	}
-	public String getNum() {
-		return num;
+	public String getId() {
+		return id;
 	}
-	public void setNum(String num) {
-		this.num = num;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getName() {
 		return name;
@@ -55,24 +51,6 @@ public class ProNBoardVO {
 	}
 	public void setPrice(int price) {
 		this.price = price;
-	}
-	public String getSizes() {
-		return sizes;
-	}
-	public void setSizes(String sizes) {
-		this.sizes = sizes;
-	}
-	public int getStock() {
-		return stock;
-	}
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
-	public String getColor() {
-		return color;
-	}
-	public void setColor(String color) {
-		this.color = color;
 	}
 	public int getCate_code() {
 		return cate_code;
@@ -91,12 +69,6 @@ public class ProNBoardVO {
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getSub_title() {
-		return sub_title;
-	}
-	public void setSub_title(String sub_title) {
-		this.sub_title = sub_title;
 	}
 	public String getContents() {
 		return contents;
@@ -122,13 +94,19 @@ public class ProNBoardVO {
 	public void setViewcount(int viewcount) {
 		this.viewcount = viewcount;
 	}
-	
 	@Override
 	public String toString() {
-		return "ProNBoardVO [code=" + code + ", num=" + num + ", name=" + name + ", price=" + price + ", sizes=" + sizes
-				+ ", stock=" + stock + ", color=" + color + ", cate_code=" + cate_code + "프로보드테이블: seq=" + seq + ", title="
-				+ title + ", sub_title=" + sub_title + ", contents=" + contents + ", thumbnail_image=" + thumbnail_image
-				+ ", write_date=" + write_date + ", viewcount=" + viewcount + ", imagefile=" + imagefile + "]";
+		return "ProNBoardVO [code=" + code + ", id=" + id + ", name=" + name + ", price=" + price + ", cate_code="
+				+ cate_code + ", thumbnail_image=" + thumbnail_image + ", seq=" + seq + ", title=" + title
+				+ ", contents=" + contents + ", write_date=" + write_date + ", viewcount=" + viewcount + ", imagefile="
+				+ imagefile + "]";
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 }	

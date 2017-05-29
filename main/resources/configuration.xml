@@ -11,5 +11,7 @@
 		<typeAlias alias="procategoryvo" type="com.otphalgo.vo.ProCategoryVO"/>
 		<typeAlias alias="pronboardvo" type="com.otphalgo.vo.ProNBoardVO"/>
 		<typeAlias alias="cartvo" type="com.otphalgo.vo.CartVO"/>
+		<typeAlias alias="prooptionvo" type="com.otphalgo.vo.ProOptionVO"/>
+		<typeAlias alias="proqnavo" type="com.otphalgo.vo.ProQnaVO"/>
 	</typeAliases>
 </configuration>

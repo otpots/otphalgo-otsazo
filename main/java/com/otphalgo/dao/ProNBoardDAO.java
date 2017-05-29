@@ -48,6 +48,18 @@ public class ProNBoardDAO {
 		List<ProNBoardVO> list = session.selectList("pro.selectBoardAll", rownum);
 		return list;	
 	}
+	public List<ProNBoardVO> selectProductAll3(int pageNum, int recordPerPage, String id){
+		int startRownum = recordPerPage*(pageNum-1)+1; 
+		int endRownum = pageNum*recordPerPage;
+		List<Integer> rownum = new ArrayList<Integer>();
+		rownum.add(startRownum);
+		rownum.add(endRownum);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("rownum", rownum);
+		List<ProNBoardVO> list = session.selectList("pro.selectProductAll3", map);
+		return list;	
+	}
 
 	public int countAllBoard(){
 		int cnt = session.selectOne("pro.countAllBoard");
@@ -55,6 +67,10 @@ public class ProNBoardDAO {
 	}
 	public int countAllProduct(){
 		int cnt = session.selectOne("pro.countAllProduct");
+		return cnt;
+	}
+	public int countSelectProduct(String id){
+		int cnt = session.selectOne("pro.countSelectProduct", id);
 		return cnt;
 	}
 	public ProNBoardVO selectProductOne(int code){
@@ -78,11 +94,13 @@ public class ProNBoardDAO {
 	public void updateProBoard(ProNBoardVO pnbvo){
 		session.update("pro.updateProBoard", pnbvo);
 	}
+	
+	
 	public void deleteProduct(ProNBoardVO pnbvo){
-		session.delete("pro.updateProduct", pnbvo);
+		session.update("pro.deleteProduct", pnbvo);
 	}
 	public void deleteProBoard(ProNBoardVO pnbvo){
-		session.delete("pro.updateProduct", pnbvo);
+		session.update("pro.deleteProBoard", pnbvo);
 	}
 
 }

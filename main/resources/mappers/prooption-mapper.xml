@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="prooption">
+	<select id="selectProOption" parameterType="int" resultType="prooptionvo">
+		select * from pro_option where code=#{code} order by seq asc
+	</select>
+
+	<insert id="insertProOption" parameterType="prooptionvo">
+		<selectKey order="BEFORE" resultType="int" keyProperty="code">
+			select max(code) from pro
+		</selectKey>
+		insert into pro_option(seq, code, sizes, stock, color) values 
+		(prooption_seq.nextval, #{code}, #{sizes}, #{stock}, #{color})
+	</insert> 
+	
+	<update id="updateProOption" parameterType="prooptionvo">
+		update pro_option set sizes=#{sizes}, stock=#{stock}, color=#{color}
+		where code=#{code}
+	</update>
+	
+	<delete id="deleteProOption" parameterType="prooptionvo">
+		delete from pro_option where code=#{code} 
+	</delete>
+</mapper>

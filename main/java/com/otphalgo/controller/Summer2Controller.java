@@ -31,7 +31,7 @@ import com.otphalgo.util.SummerUploadUtils;
 public class Summer2Controller {
 	private static final Logger logger = LoggerFactory.getLogger(Summer2Controller.class);
 	
-	@Resource(name="uploadPath") //ê¸°ë³¸ ì €ì¥ê²½ë¡œ: root-contextì—ì„œ í™•ì¸!
+	@Resource(name="uploadPath") //±âº» ÀúÀå°æ·Î: root-context¿¡¼­ È®ÀÎ!
 	private String uploadPath;
 	
 	@ResponseBody
@@ -44,7 +44,7 @@ public class Summer2Controller {
 //		logger.info("contentType: "+multipartFile.getContentType());
 		
 		if(multipartFile != null && !(multipartFile.getOriginalFilename().equals(""))) {
-	        // í´ë” ìƒì„± + íŒŒì¼ ì €ì¥ // returnê°’ : ë¸Œë¼ìš°ì €ìƒì˜ ì´ë¯¸ì§€ì£¼ì†Œ (http://ip.port/ ë‹¤ìŒë¶€í„°)
+			// Æú´õ »ı¼º + ÆÄÀÏ ÀúÀå // return°ª : ºê¶ó¿ìÀú»óÀÇ ÀÌ¹ÌÁöÁÖ¼Ò (http://ip.port/ ´ÙÀ½ºÎÅÍ)
 			Map<String, Object> urlpath = SummerUploadUtils.uploadFile(uploadPath, multipartFile);       
 	        if((int)urlpath.get("result") == -1){
 	        	fileInfo.put("result", -1);
@@ -54,28 +54,25 @@ public class Summer2Controller {
 	        	return new ResponseEntity<Object>(fileInfo, HttpStatus.NOT_ACCEPTABLE);
 	        } else{
 		        String imageurl = (String) request.getRequestURL().toString().replace(request.getRequestURI(), "")+"/displayFile?fileName="+(String)urlpath.get("urlpath");
-		        //logger.info("ìµœì¢… imageurl : "+imageurl);
-		        
-		        fileInfo.put("imageurl", imageurl);     //ìƒëŒ€íŒŒì¼ê²½ë¡œ(ì‚¬ì´ì¦ˆë³€í™˜ì´ë‚˜ ë³€í˜•ëœ íŒŒì¼)
-		        fileInfo.put("originalname", urlpath.get("originalname"));   //ì›ë³¸íŒŒì¼ëª…
-		        fileInfo.put("filename", urlpath.get("saveName"));   //ì €ì¥ëœíŒŒì¼ëª…
-		        fileInfo.put("filesize", urlpath.get("filesize"));     //íŒŒì¼ì‚¬ì´ì¦ˆ
-		        fileInfo.put("fileextension",urlpath.get("formatName"));     //íŒŒì¼í™•ì¥ì
+		        //logger.info("ÃÖÁ¾ imageurl : "+imageurl);   
+		        fileInfo.put("imageurl", imageurl);     //»ó´ëÆÄÀÏ°æ·Î(»çÀÌÁîº¯È¯ÀÌ³ª º¯ÇüµÈ ÆÄÀÏ)
+		        fileInfo.put("originalname", urlpath.get("originalname"));   //¿øº»ÆÄÀÏ¸í
+		        fileInfo.put("filename", urlpath.get("saveName"));   //ÀúÀåµÈÆÄÀÏ¸í
+		        fileInfo.put("filesize", urlpath.get("filesize"));     //ÆÄÀÏ»çÀÌÁî
+		        fileInfo.put("fileextension",urlpath.get("formatName"));     //ÆÄÀÏÈ®ÀåÀÚ
 		        fileInfo.put("result", 1);
 	        }
 		}	
 		return new ResponseEntity<Object>(fileInfo, HttpStatus.CREATED);			
 	}
 	
-   //byte[]ë°ì´í„°ê°€ ê·¸ëŒ€ë¡œ ì „ì†¡ë  ê²ƒì„ ëª…ì‹œí•´ì¤€ë‹¤.
-   @ResponseBody
-   @RequestMapping("/displayFile")
-   //fileNameì€ /ë…„/ì›”/ì¼/íŒŒì¼ëª…ì˜ í˜•íƒœë¡œ ì…ë ¥ë°›ëŠ”ë‹¤. ë¦¬í„´íƒ€ì…ì€ ResponseEntity<byte[]>ë¡œ ì‹¤ì œ íŒŒì¼ì˜ ë°ì´í„°ê°€ ëœë‹¤.
-   public ResponseEntity<byte[]> displayFile(String fileName) throws Exception{
-      
-      InputStream in = null;
-      ResponseEntity<byte[]> entity = null;
-      
+	//byte[]µ¥ÀÌÅÍ°¡ ±×´ë·Î Àü¼ÛµÉ °ÍÀ» ¸í½ÃÇØÁØ´Ù.
+	@ResponseBody
+	@RequestMapping("/displayFile")
+	//fileNameÀº /³â/¿ù/ÀÏ/ÆÄÀÏ¸íÀÇ ÇüÅÂ·Î ÀÔ·Â¹Ş´Â´Ù. ¸®ÅÏÅ¸ÀÔÀº ResponseEntity<byte[]>·Î ½ÇÁ¦ ÆÄÀÏÀÇ µ¥ÀÌÅÍ°¡ µÈ´Ù.
+	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception{
+	  InputStream in = null;
+	  ResponseEntity<byte[]> entity = null;
       logger.info("FILE NAME : "+fileName);
       try{
          String formatName = fileName.substring(fileName.lastIndexOf(".")+1);

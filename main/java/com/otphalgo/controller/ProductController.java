@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -18,8 +21,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.otphalgo.service.ProCategoryService;
 import com.otphalgo.service.ProNBoardService;
+import com.otphalgo.service.ProOptionSerivce;
+import com.otphalgo.service.ProQnaService;
+import com.otphalgo.vo.MemberVO;
 import com.otphalgo.vo.ProCategoryVO;
 import com.otphalgo.vo.ProNBoardVO;
+import com.otphalgo.vo.ProOptionVO;
+import com.otphalgo.vo.ProQnaVO;
 
 @Controller
 public class ProductController {
@@ -29,25 +37,30 @@ public class ProductController {
 	ProNBoardService proservice;
 	@Autowired
 	ProCategoryService proCategoryService;
+	@Autowired
+	ProOptionSerivce prooptionservice;
+	@Autowired
+	ProQnaService proqnaservice;
 	
-	//Î™®Îì† ÏÉÅÌíà Ï°∞Ìöå
+	//∏µÁ ªÛ«∞ ¡∂»∏
 	@RequestMapping("/listproduct")
 	public ModelAndView selectProductAll(
 			@RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum, 
-			@RequestParam(value="recordPerPage", required=false, defaultValue="5") int recordPerPage){
+			@RequestParam(value="recordPerPage", required=false, defaultValue="20") int recordPerPage){
 		ModelAndView mav = new ModelAndView();
 		List<ProNBoardVO> prolist = proservice.selectProductAll(pageNum, recordPerPage);
 		List<ProNBoardVO> proboardlist = proservice.selectBoardAll(pageNum, recordPerPage);
 		int procount = proservice.countAllProduct();
 		mav.addObject("prolist", prolist);
 		mav.addObject("proboardlist", proboardlist);
+		mav.addObject("pageNum", pageNum);
 		mav.addObject("recordPerPage", recordPerPage);
 		mav.addObject("procount", procount);
 		mav.setViewName("pronboard/pronboardList");
 		return mav;
 	}
 		
-	//Ïπ¥ÌÖåÍ≥†Î¶¨Î≥Ñ ÏÉÅÌíà Ï°∞Ìöå
+	//ƒ´≈◊∞Ì∏Æ∫∞ ªÛ«∞ ¡∂»∏
 	@RequestMapping("/listproduct2")
 	public ModelAndView selectProductAll2(
 			@RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum, 
@@ -63,14 +76,37 @@ public class ProductController {
 		return mav;
 	}
 	
+	//∆«∏≈¿⁄∫∞ µÓ∑œ ¡¶«∞ ¡∂»∏
+	@RequestMapping("/listproduct3")
+	public ModelAndView selectProductAll3(
+			@RequestParam(value="pageNum", required=false, defaultValue="1") int pageNum, 
+			@RequestParam(value="recordPerPage", required=false, defaultValue="5") int recordPerPage,
+			HttpSession session){
+		MemberVO vo = (MemberVO) session.getAttribute("user");
+		String id = vo.getId();
+		ModelAndView mav = new ModelAndView();
+		List<ProNBoardVO> prolist = proservice.selectProductAll3(pageNum, recordPerPage, id);
+		int procount = proservice.countSelectProduct(id);
+		mav.addObject("prolist", prolist);
+		mav.addObject("recordPerPage", recordPerPage);
+		mav.addObject("procount", procount);
+		mav.setViewName("pronboard/pronboardList2");
+		return mav;
+	}
+	
 	@RequestMapping("/detailproduct")
 	public ModelAndView selectProductOne(int code){
-		ProNBoardVO pnbvo = proservice.selectProductOne(code);
-		ProNBoardVO pnbvo2 = proservice.selectBoardOne(code);
+		ProNBoardVO pro = proservice.selectProductOne(code);
+		ProNBoardVO proboard = proservice.selectBoardOne(code);
+		List<ProOptionVO> polist = prooptionservice.selectProOption(code);
+		List<ProQnaVO> pqlist = proqnaservice.selectProQna(code);
+		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("pnbvo", pnbvo);
-		mav.addObject("pnbvo2", pnbvo2);
-		mav.setViewName("pronboard/productdetail");
+		mav.addObject("pqlist", pqlist);
+		mav.addObject("polist", polist);
+		mav.addObject("pro", pro);
+		mav.addObject("proboard", proboard);
+		mav.setViewName("pronboard/pronboarddetail");
 		return mav;
 	}
 	
@@ -83,27 +119,62 @@ public class ProductController {
 		return mav;
 	}
 	@RequestMapping(value="/writepronboard", method=RequestMethod.POST)
-	public String insertProduct(ProNBoardVO pnbvo) throws IOException{
-		logger.info("Ïù∏ÏÑúÌä∏Ï†Ñ: "+pnbvo);
-		//Ïª¥Ìì®ÌÑ∞Ïóê Ïù¥ÎØ∏ÏßÄ Ï†ÄÏû•Îê† Í≤ΩÎ°ú ÌôïÏù∏ÌïòÏÑ∏Ïó¨~
-		String path="C:/Users/killersin/Desktop/workspace_webproject/otphlgo_otsazo/src/main/webapp/resources/images/product/";
+	public String insertProduct(ProNBoardVO pnbvo, HttpSession session, HttpServletRequest request) throws IOException{
+		//logger.info(pnbvo.toString());
+		//ƒƒ«ª≈Õø° ¿ÃπÃ¡ˆ ¿˙¿Âµ… ∞Ê∑Œ »Æ¿Œ«œººø©~
+		String path="C:/Users/killersin/Desktop/workspace_spring/Otphalgo_Otsazo/src/main/webapp/resources/images/product/";
 		File f = new File(path+pnbvo.getThumbnail_image());
         if(!f.isDirectory()){
             f.mkdir();
         }
         pnbvo.getImagefile().transferTo(f);
-		pnbvo.setNum("s46307110739e47ed9c7b3727dbcfd51b");
-		//proservice.insertProduct(pnbvo);
-		//logger.info("Ïù∏ÏÑúÌà¨ÏÑ±Í≥µ! "+pnbvo);
+        MemberVO mvo = (MemberVO) session.getAttribute("user");
+        pnbvo.setId(mvo.getId());
+        proservice.insertProduct(pnbvo);
+		
+		String[] sizes = request.getParameterValues("sizes");
+		String[] stock = request.getParameterValues("stock");
+		String[] color = request.getParameterValues("color");
+		for(int i=0; i<sizes.length; i++){
+			int intstock = Integer.parseInt(stock[i]);
+			//logger.info("ªÁ¿Ã¡Ó: "+sizes[i]+" ¿Á∞Ì: "+intstock);
+			prooptionservice.insertProOption(sizes[i], intstock, color[i]);
+		}
 		return "pronboard/pronboardwritesuccess";
+	}
+	
+	@RequestMapping(value="/updatepronboard", method=RequestMethod.GET)
+	public ModelAndView updateBoard(int code) {	
+		ModelAndView mav = new ModelAndView();
+		ProNBoardVO pro = proservice.selectProductOne(code);
+		ProNBoardVO proboard = proservice.selectBoardOne(code);
+		List<ProCategoryVO> pcvolist = proCategoryService.classifyProCategory1();
+		List<ProOptionVO> polist = prooptionservice.selectProOption(code);
+		mav.addObject("polist", polist);
+		mav.addObject("pcvolist", pcvolist);
+		mav.addObject("pro", pro);
+		mav.addObject("proboard", proboard);
+		mav.setViewName("pronboard/pronboardupdate");
+		return mav;
+	}
+	@RequestMapping(value="/updatepronboard", method=RequestMethod.POST)
+	public String updateBoard(ProNBoardVO pnbvo) throws Exception{
+		String path="C:/Users/killersin/Desktop/workspace_spring/Otphalgo_Otsazo/src/main/webapp/resources/images/product/";
+		File f = new File(path+pnbvo.getThumbnail_image());
+        if(!f.isDirectory()){
+            f.mkdir();
+        }
+        pnbvo.getImagefile().transferTo(f);
+		proservice.updateProduct(pnbvo);
+		return "mypage/mypagemain";
 	}
 
 	@ResponseBody
 	@RequestMapping(value="/cateclassify", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public String cateClassify(int cate_code) {
-		//logger.info("Ï§ëÎ∂ÑÎ•ò Ïπ¥Ìä∏ÏΩîÌä∏: "+cate_code);
+		//logger.info("¡ﬂ∫–∑˘ ƒ´∆Æƒ⁄∆Æ: "+cate_code);
 		List<ProCategoryVO> pcvolist = proCategoryService.classifyProCategory2(cate_code);
-		//JSON-SIMPLE-1-.jar Î•º importÌï¥Ï§òÏïºÌï®
+		//JSON-SIMPLE-1-.jar ∏¶ import«ÿ¡‡æﬂ«‘
 		JSONArray array = new JSONArray();
 		for(ProCategoryVO pcvo : pcvolist){
 			JSONObject obj = new JSONObject();
@@ -113,13 +184,13 @@ public class ProductController {
 		}
 		String result = "";
 		result = array.toJSONString();
-		//logger.info("ÌîÑÎ°úÏπ¥ÌÖåÍ≥†Î¶¨Ï§ëÎ∂ÑÎ•òÌïòÍ∏∞: "+pcvolist.toString());
-	    return result;
+		//logger.info("«¡∑Œƒ´≈◊∞Ì∏Æ¡ﬂ∫–∑˘«œ±‚: "+pcvolist.toString());
+		return result;
 	}
 	@ResponseBody
 	@RequestMapping(value="/cateclassify2", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public String cateClassify2(int cate_code) {
-		//logger.info("ÏÜåÎ∂ÑÎ•ò Ïπ¥Ìä∏ÏΩîÌä∏: "+cate_code);
+		//logger.info("º“∫–∑˘ ƒ´∆Æƒ⁄∆Æ: "+cate_code);
 		List<ProCategoryVO> pcvolist = proCategoryService.classifyProCategory2(cate_code);
 		JSONArray array = new JSONArray();
 		for(ProCategoryVO pcvo : pcvolist){
@@ -130,7 +201,7 @@ public class ProductController {
 		}
 		String result = "";
 		result = array.toJSONString();
-		//logger.info("ÌîÑÎ°úÏπ¥ÌÖåÍ≥†Î¶¨ÏÜåÎ∂ÑÎ•òÌïòÍ∏∞: "+pcvolist.toString());
+		//logger.info("«¡∑Œƒ´≈◊∞Ì∏Æº“∫–∑˘«œ±‚: "+pcvolist.toString());
 	    return result;
 	}
 	

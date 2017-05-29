@@ -33,6 +33,10 @@ public class ProNBoardServiceImpl implements ProNBoardService {
 	public List<ProNBoardVO> selectProductAll2(int pageNum, int recordPerPage, int cate_code) {
 		return pdao.selectProductAll2(pageNum, recordPerPage, cate_code);
 	}
+	@Override
+	public List<ProNBoardVO> selectProductAll3(int pageNum, int recordPerPage, String id) {
+		return pdao.selectProductAll3(pageNum, recordPerPage, id);
+	}
 	
 	@Override
 	public int countAllProduct() {
@@ -41,6 +45,10 @@ public class ProNBoardServiceImpl implements ProNBoardService {
 	@Override
 	public int countAllBoard() {
 		return pdao.countAllBoard();
+	}
+	@Override
+	public int countSelectProduct(String id) {
+		return pdao.countSelectProduct(id);
 	}
 	@Override
 	public ProNBoardVO selectProductOne(int code){
